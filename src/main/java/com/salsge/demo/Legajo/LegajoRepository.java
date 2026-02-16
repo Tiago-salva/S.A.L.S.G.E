@@ -1,4 +1,6 @@
 package com.salsge.demo.Legajo;
 
-public class LegajoRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface LegajoRepository extends JpaRepository<Legajo, Long> {
 }
