@@ -1,5 +1,6 @@
 package com.salsge.demo.Employees;
 
+import com.salsge.demo.Legajo.Legajo;
 import jakarta.persistence.*;
 
 import java.sql.Date;
@@ -18,6 +19,10 @@ public class Employee {
             generator = "employee_sequence"
     )
     private Long id;
+
+    @OneToOne(mappedBy = "employee")
+    private Legajo legajo;
+
     private String fullName;
     private Integer age;
     private Date fechaNacimiento;
@@ -98,4 +103,13 @@ public class Employee {
         return "Empleado N°"+ id + " " + fullName +
                 ", age: " + age;
     }
+
+    // Function for later
+    /*
+    public void assignLegajo(Legajo legajo) {
+        this.legajo = legajo;
+        legajo.setEmployee(this);
+    }
+    */
+
 }
