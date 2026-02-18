@@ -3,6 +3,7 @@ package com.salsge.demo.Legajo;
 import com.salsge.demo.Employees.Employee;
 import jakarta.persistence.*;
 
+@Entity(name = "legajo")
 public class Legajo {
 
     @Id
