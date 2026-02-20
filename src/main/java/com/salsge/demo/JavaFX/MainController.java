@@ -1,6 +1,7 @@
 package com.salsge.demo.JavaFX;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -10,7 +11,8 @@ import java.io.IOException;
 
 public class MainController {
 
-    public void loadEmployeesView() throws IOException {
+    @FXML
+    public void loadEmployeesView(ActionEvent event) throws IOException {
         openFxmlView("/views/Employees.fxml", "Employees");
     }
 
@@ -25,7 +27,6 @@ public class MainController {
     }
 
     public void openFxmlView(String path, String title) throws IOException {
-
         FXMLLoader loader = new FXMLLoader((getClass().getResource(path)));
         Parent root = loader.load();
 
