@@ -76,10 +76,4 @@ public class LegajoService {
         legajoRepository.save(legajo);
 
     }
-
-    public void deleteLegajo() {
-        // Get legajo id from console
-        Long legajoId = 1L;
-        legajoRepository.deleteById(legajoId);
-    }
 }
