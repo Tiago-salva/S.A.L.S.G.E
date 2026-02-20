@@ -14,10 +14,6 @@ import java.util.Optional;
 
         Scanner sn = new Scanner(System.in);
 
-        public EmployeeService(EmployeeRepository employeeRepository) {
-            this.employeeRepository = employeeRepository;
-        }
-
         public List<Employee> getAllEmployees() {
             return employeeRepository.findAll();
         }
@@ -74,13 +70,6 @@ import java.util.Optional;
             employee.setSexo(sexo);
 
             employeeRepository.save(employee);
-        }
-
-        public void deleteEmployee() {
-            System.out.print("Ingrese el id del empleado: ");
-            Long employeeId = (long) sn.nextInt();
-
-            employeeRepository.deleteById(employeeId);
         }
 
     }
