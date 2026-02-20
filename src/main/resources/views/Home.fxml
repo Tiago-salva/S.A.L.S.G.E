@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
-
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.salsge.demo.JavaFX.MainController">
    <children>
-      <MenuBar layoutY="1.0" prefHeight="26.0" prefWidth="600.0">
-        <menus>
-          <Menu mnemonicParsing="false" text="Empleados" onAction="#loadEmployeesView" />
-          <Menu mnemonicParsing="false" text="Legajo" onAction="#loadPayrollView" />
-          <Menu mnemonicParsing="false" text="Liquidacion" onAction="#loadLegajosView" />
-            <Menu mnemonicParsing="false" text="Novedades" onAction="#loadNovedadesView" />
-        </menus>
-      </MenuBar>
+      <AnchorPane layoutY="8.0" prefHeight="38.0" prefWidth="600.0">
+         <children>
+            <Button fx:id="employeesBtn" layoutX="14.0" layoutY="5.0" mnemonicParsing="false" onAction="#loadEmployeesView" text="Empleados" />
+            <Button layoutX="120.0" layoutY="5.0" mnemonicParsing="false" text="Legajo" />
+            <Button layoutX="211.0" layoutY="5.0" mnemonicParsing="false" text="Liquidacion" />
+            <Button layoutX="324.0" layoutY="5.0" mnemonicParsing="false" text="Novedades" />
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>
