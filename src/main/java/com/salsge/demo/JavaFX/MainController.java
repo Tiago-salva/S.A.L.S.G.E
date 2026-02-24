@@ -30,9 +30,10 @@ public class MainController {
         FXMLLoader loader = new FXMLLoader((getClass().getResource(path)));
         Parent root = loader.load();
 
-        Scene scene = new Scene(root, 500, 500);
+        Scene scene = new Scene(root, 900, 800);
 
         Stage stage = new Stage();
+        stage.setResizable(false);
         stage.setTitle(title);
         stage.setScene(scene);
         stage.show();
