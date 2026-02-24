@@ -3,6 +3,7 @@ package com.salsge.demo.Employees;
 import java.sql.Date;
 import java.util.Scanner;
 
+import com.salsge.demo.Legajo.Legajo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +16,6 @@ import java.util.Optional;
         @Autowired
         EmployeeRepository employeeRepository;
 
-        Scanner sn = new Scanner(System.in);
-
         public List<Employee> getAllEmployees() {
             return employeeRepository.findAll();
         }
@@ -25,56 +24,21 @@ import java.util.Optional;
             return employeeRepository.findByFullNameContainingIgnoreCase(fullName);
         }
 
-        public Optional<Employee> getEmployee() {
-            System.out.print("Ingrese el id del empleado: ");
-            Long employeeId = (long) sn.nextInt();
-            return employeeRepository.findById(employeeId);
+        public Optional<Employee> getEmployee(Long id) {
+            return employeeRepository.findById(id);
         }
 
-        public void createEmployee() {
-            System.out.print("Ingrese el nombre completo del empleado: ");
-            String employeeFullName = sn.next();
+        public void createEmployee(String employeeFullName) {
 
-            System.out.print("Ingrese la edad del empleado: ");
-            int employeeAge = sn.nextInt();
-
-            System.out.print("Ingrese la fecha de nacimiento del empleado: ");
-            Date dateOfBirth = Date.valueOf(sn.next());
-
-            System.out.print("Ingrese el estado civil del empleado: ");
-            String estadoCivil = sn.next();
-
-            System.out.print("Ingrese el sexo del empleado: ");
-            String sexo = sn.next();
-
-            //Employee employee = new Employee(employeeFullName, employeeAge, dateOfBirth, estadoCivil, sexo);
-            //employeeRepository.save(employee);
+            Employee employee = new Employee(employeeFullName);
+            employeeRepository.save(employee);
         }
 
-        public void updateEmployee() {
-            Employee employee = getEmployee()
+        public void updateEmployee(Long id, String employeeFullName) {
+            Employee employee = getEmployee(id)
                     .orElseThrow(() -> new RuntimeException("Employee not found"));
 
-            System.out.print("Ingrese el nombre completo del empleado: ");
-            String employeeFullName = sn.next();
-
-            System.out.print("Ingrese la edad del empleado: ");
-            int employeeAge = sn.nextInt();
-
-            System.out.print("Ingrese la fecha de nacimiento del empleado: ");
-            Date dateOfBirth = Date.valueOf(sn.next());
-
-            System.out.print("Ingrese el estado civil del empleado: ");
-            String estadoCivil = sn.next();
-
-            System.out.print("Ingrese el sexo del empleado: ");
-            String sexo = sn.next();
-
-            //employee.setFullName(employeeFullName);
-            //employee.setAge(employeeAge);
-            //employee.setFechaNacimiento(dateOfBirth);
-            //employee.setEstadoCivil(estadoCivil);
-            //employee.setSexo(sexo);
+            employee.setFullName(employeeFullName);
 
             employeeRepository.save(employee);
         }
