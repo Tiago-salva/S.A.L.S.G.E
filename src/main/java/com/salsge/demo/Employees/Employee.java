@@ -9,52 +9,44 @@ import java.sql.Date;
 public class Employee {
 
     @Id
-    @SequenceGenerator(
-            name = "employee_sequence",
-            sequenceName = "employee_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "employee_sequence"
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToOne(mappedBy = "employee")
     private Legajo legajo;
 
     private String fullName;
-    private Integer age;
-    private Date fechaNacimiento;
-    private String estadoCivil;
-    private String sexo;
 
     public Employee() {}
 
-    public Employee(Long id, String fullName, Integer age, Date fechaNacimiento, String estadoCivil, String sexo) {
+    public Employee(Long id, Legajo legajo, String fullName) {
         this.id = id;
+        this.legajo = legajo;
         this.fullName = fullName;
-        this.age = age;
-        this.fechaNacimiento = fechaNacimiento;
-        this.estadoCivil = estadoCivil;
-        this.sexo = sexo;
     }
 
-    public Employee(String fullName, Integer age, Date fechaNacimiento, String estadoCivil, String sexo) {
+    public Employee(Legajo legajo, String fullName) {
+        this.legajo = legajo;
         this.fullName = fullName;
-        this.age = age;
-        this.fechaNacimiento = fechaNacimiento;
-        this.estadoCivil = estadoCivil;
-        this.sexo = sexo;
     }
 
     // Getters  and setters
+
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Legajo getLegajo() {
+        return legajo;
+    }
+
+    public void setLegajo(Legajo legajo) {
+        this.legajo = legajo;
     }
 
     public String getFullName() {
@@ -65,43 +57,10 @@ public class Employee {
         this.fullName = fullName;
     }
 
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    public Date getFechaNacimiento() {
-        return fechaNacimiento;
-    }
-
-    public void setFechaNacimiento(Date fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
-    }
-
-    public String getEstadoCivil() {
-        return estadoCivil;
-    }
-
-    public void setEstadoCivil(String estadoCivil) {
-        this.estadoCivil = estadoCivil;
-    }
-
-    public String getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
-    }
-
     // ToString method
     @Override
     public String toString() {
-        return "Empleado N°"+ id + " " + fullName +
-                ", age: " + age;
+        return "Empleado N°" + this.id + " " + this.fullName;
     }
 
     // Function for later
