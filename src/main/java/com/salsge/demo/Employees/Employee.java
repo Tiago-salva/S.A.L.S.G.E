@@ -25,13 +25,11 @@ public class Employee {
         this.fullName = fullName;
     }
 
-    public Employee(Legajo legajo, String fullName) {
-        this.legajo = legajo;
+    public Employee(String fullName) {
         this.fullName = fullName;
     }
 
     // Getters  and setters
-
 
     public Long getId() {
         return id;
