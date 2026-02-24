@@ -7,30 +7,36 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class EmployeesController {
 
-    EmployeeService employeeService = new EmployeeService();
+    @Autowired
+    EmployeeService employeeService;
 
     @FXML private TableView<Employee> allEmployeesView;
-    @FXML private TableColumn<Employee, Integer> colId;
-    @FXML private TableColumn<Employee, String> colName;
-    @FXML private TableColumn<Employee, String> colLastname;
-    @FXML private TableColumn<Employee, Integer> colAge;
-    @FXML private TableColumn<Employee, Integer> colSalary;
+    @FXML private TableColumn<Employee, String> colFullName;
+    @FXML private TextField employeeName;
 
     @FXML
-    public void renderAllEmployees(ActionEvent event) {
+    public void renderAllEmployees(String employeeFullName) {
 
-        colId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        colName.setCellValueFactory(new PropertyValueFactory<>("fullName"));
-        colLastname.setCellValueFactory(new PropertyValueFactory<>("age"));
-        colAge.setCellValueFactory(new PropertyValueFactory<>("fechaNacimiento"));
-        colSalary.setCellValueFactory(new PropertyValueFactory<>("estadoCivil"));
+        colFullName.setCellValueFactory(new PropertyValueFactory<>("fullName"));
 
-        allEmployeesView.setItems(FXCollections.observableArrayList(employeeService.getAllEmployees()));
+        allEmployeesView.setItems(FXCollections.observableArrayList(employeeService.getEmployeeByName(employeeFullName)));
 
+    }
+
+    @FXML
+    public void initialize() {
+        employeeName.textProperty().addListener((observable, oldValue, newValue) -> {
+            System.out.println(newValue);
+            renderAllEmployees(newValue);
+        });
     }
 
 }
