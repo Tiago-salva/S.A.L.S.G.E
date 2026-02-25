@@ -22,58 +22,15 @@ public class LegajoService {
         return legajoRepository.findAll();
     }
 
-    public Optional<Legajo> getLegajo() {
-        Long legajoId = 1L;
-        return legajoRepository.findById(legajoId);
+    public Optional<Legajo> getLegajo(Long id) {
+        return legajoRepository.findById(id);
     }
 
-    public void createLegajo() {
-        // Get data from console
-        Employee employee = employeeRepository.findById(1L)
-                .orElseThrow(() -> new RuntimeException("Employee not found"));
-        int numeroDeLegajo = 12345678;
-        String fullName = "Pepe Largo";
-        String name = "Pepe";
-        String lastName = "Largo";
-        String direccion = "San jose 1113";
-        int codigoPostal = 1234;
+    public void createLegajo(Long employeeId, Legajo legajoData) {
+        // Realizar comprobaciones
 
-        Legajo legajo = new Legajo(employee,
-                numeroDeLegajo,
-                fullName,
-                name,
-                lastName,
-                direccion,
-                codigoPostal);
-
-        legajoRepository.save(legajo);
-
+        legajoRepository.save(legajoData);
     }
 
-    public void updateLegajo() {
-        // Get data from console
-        Legajo legajo = legajoRepository.findById(1L)
-                .orElseThrow(() -> new RuntimeException("Employee not found"));
-
-        // Will be added in a future
-        // Employee employee;
-
-        int numeroDeLegajo = 12345678;
-        String fullName = "Pepe Largo";
-        String name = "Pepe";
-        String lastName = "Largo";
-        String direccion = "San jose 1113";
-        int codigoPostal = 1234;
-
-        // legajo.setEmployee();
-        legajo.setNumeroDeLegajo(numeroDeLegajo);
-        legajo.setFullName(fullName);
-        legajo.setName(name);
-        legajo.setLastName(lastName);
-        legajo.setDireccion(direccion);
-        legajo.setCodigoPostal(codigoPostal);
-
-        legajoRepository.save(legajo);
-
-    }
+    // Agregar editLegajo en un futuro
 }
