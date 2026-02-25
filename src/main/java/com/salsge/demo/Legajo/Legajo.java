@@ -3,54 +3,68 @@ package com.salsge.demo.Legajo;
 import com.salsge.demo.Employees.Employee;
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
 @Entity(name = "legajo")
 public class Legajo {
 
     @Id
-    @SequenceGenerator(
-            name = "legajo_sequence",
-            sequenceName = "legajo_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "legajo_sequence"
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "employee_id")
+    @OneToOne(optional = false)
+    @JoinColumn(name = "employee_id", nullable = false, unique = true)
+
     private Employee employee;
 
     private Integer numeroDeLegajo;
-    private String fullName;
-    private String name;
-    private String lastName;
-    private String direccion;
-    private Integer codigoPostal;
 
+    private String direccion;
+    private Integer numeroDeDireccion;
+    private Integer piso;
+    private Integer depto;
+    private String codigoPostal;
+    private String localidad;
+
+    private String dni;
+    private String cuit;
+
+    private String telefono;
+    private String telefonoDeEmergencia;
+    private String email;
+
+    private LocalDate fechaDeNacimiento;
+    private LocalDate fechaDeIngreso;
+
+    private String sexo;
+    private String estadoCivil;
+
+    private String cbu;
+    private String cta;
+    private String banco;
+
+    private BigDecimal sueldo;
+
+    private String tipoEmpleado;
+    private String convenio;
+    private String obraSocial;
+
+    // Constructores
     public Legajo() {};
 
-    public Legajo(Long id, Employee employee, Integer numeroDeLegajo, String fullName, String name, String lastName, String direccion, Integer codigoPostal) {
+    public Legajo(Long id, Employee employee, Integer numeroDeLegajo) {
         this.id = id;
         this.employee = employee;
         this.numeroDeLegajo = numeroDeLegajo;
-        this.fullName = fullName;
-        this.name = name;
-        this.lastName = lastName;
-        this.direccion = direccion;
-        this.codigoPostal = codigoPostal;
     }
 
-    public Legajo(Employee employee, Integer numeroDeLegajo, String fullName, String name, String lastName, String direccion, Integer codigoPostal) {
+    public Legajo(Employee employee, Integer numeroDeLegajo) {
         this.employee = employee;
         this.numeroDeLegajo = numeroDeLegajo;
-        this.fullName = fullName;
-        this.name = name;
-        this.lastName = lastName;
-        this.direccion = direccion;
-        this.codigoPostal = codigoPostal;
     }
+
+    // Getters and setters
 
     public Long getId() {
         return id;
@@ -76,30 +90,6 @@ public class Legajo {
         this.numeroDeLegajo = numeroDeLegajo;
     }
 
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
     public String getDireccion() {
         return direccion;
     }
@@ -108,11 +98,171 @@ public class Legajo {
         this.direccion = direccion;
     }
 
-    public Integer getCodigoPostal() {
+    public Integer getNumeroDeDireccion() {
+        return numeroDeDireccion;
+    }
+
+    public void setNumeroDeDireccion(Integer numeroDeDireccion) {
+        this.numeroDeDireccion = numeroDeDireccion;
+    }
+
+    public Integer getPiso() {
+        return piso;
+    }
+
+    public void setPiso(Integer piso) {
+        this.piso = piso;
+    }
+
+    public Integer getDepto() {
+        return depto;
+    }
+
+    public void setDepto(Integer depto) {
+        this.depto = depto;
+    }
+
+    public String getCodigoPostal() {
         return codigoPostal;
     }
 
-    public void setCodigoPostal(Integer codigoPostal) {
+    public void setCodigoPostal(String codigoPostal) {
         this.codigoPostal = codigoPostal;
+    }
+
+    public String getLocalidad() {
+        return localidad;
+    }
+
+    public void setLocalidad(String localidad) {
+        this.localidad = localidad;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    public String getCuit() {
+        return cuit;
+    }
+
+    public void setCuit(String cuit) {
+        this.cuit = cuit;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getTelefonoDeEmergencia() {
+        return telefonoDeEmergencia;
+    }
+
+    public void setTelefonoDeEmergencia(String telefonoDeEmergencia) {
+        this.telefonoDeEmergencia = telefonoDeEmergencia;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public LocalDate getFechaDeNacimiento() {
+        return fechaDeNacimiento;
+    }
+
+    public void setFechaDeNacimiento(LocalDate fechaDeNacimiento) {
+        this.fechaDeNacimiento = fechaDeNacimiento;
+    }
+
+    public LocalDate getFechaDeIngreso() {
+        return fechaDeIngreso;
+    }
+
+    public void setFechaDeIngreso(LocalDate fechaDeIngreso) {
+        this.fechaDeIngreso = fechaDeIngreso;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
+    public String getEstadoCivil() {
+        return estadoCivil;
+    }
+
+    public void setEstadoCivil(String estadoCivil) {
+        this.estadoCivil = estadoCivil;
+    }
+
+    public String getCbu() {
+        return cbu;
+    }
+
+    public void setCbu(String cbu) {
+        this.cbu = cbu;
+    }
+
+    public String getCta() {
+        return cta;
+    }
+
+    public void setCta(String cta) {
+        this.cta = cta;
+    }
+
+    public String getBanco() {
+        return banco;
+    }
+
+    public void setBanco(String banco) {
+        this.banco = banco;
+    }
+
+    public BigDecimal getSueldo() {
+        return sueldo;
+    }
+
+    public void setSueldo(BigDecimal sueldo) {
+        this.sueldo = sueldo;
+    }
+
+    public String getTipoEmpleado() {
+        return tipoEmpleado;
+    }
+
+    public void setTipoEmpleado(String tipoEmpleado) {
+        this.tipoEmpleado = tipoEmpleado;
+    }
+
+    public String getConvenio() {
+        return convenio;
+    }
+
+    public void setConvenio(String convenio) {
+        this.convenio = convenio;
+    }
+
+    public String getObraSocial() {
+        return obraSocial;
+    }
+
+    public void setObraSocial(String obraSocial) {
+        this.obraSocial = obraSocial;
     }
 }
