@@ -12,7 +12,7 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(mappedBy = "employee")
+    @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
     private Legajo legajo;
 
     private String fullName;
@@ -61,12 +61,9 @@ public class Employee {
         return "Empleado N°" + this.id + " " + this.fullName;
     }
 
-    // Function for later
-    /*
     public void assignLegajo(Legajo legajo) {
         this.legajo = legajo;
         legajo.setEmployee(this);
     }
-    */
 
 }
