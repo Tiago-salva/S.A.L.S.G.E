@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.salsge.demo.JavaFX.LegajoController">
    <children>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="798.0" prefWidth="598.0" style="-fx-background-color: light-grey;">
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="798.0" prefWidth="1054.0" style="-fx-background-color: light-grey;">
           <TextField fx:id="legajoField" layoutX="102.0" layoutY="24.0" />
           <Text layoutX="24.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Legajo" wrappingWidth="68.045654296875">
               <font>
@@ -166,7 +166,7 @@
               </font>
           </Text>
           <TextField fx:id="obraSocialField" layoutX="121.0" layoutY="698.0" prefHeight="26.0" prefWidth="211.0" />
-          <Button fx:id="createButton" layoutX="173.0" layoutY="749.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="106.0" text="Crear">
+          <Button fx:id="createButton" layoutX="173.0" layoutY="749.0" mnemonicParsing="false" onAction="#createLegajo" prefHeight="35.0" prefWidth="106.0" text="Crear">
               <font>
                   <Font size="14.0" />
               </font>
@@ -176,6 +176,49 @@
                   <Font size="14.0" />
               </font>
           </Button>
+         <Text layoutX="644.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Antiguedad" wrappingWidth="140.845703125">
+            <font>
+               <Font size="15.0" />
+            </font>
+         </Text>
+         <CheckBox contentDisplay="GRAPHIC_ONLY" layoutX="1000.0" layoutY="28.0" mnemonicParsing="false" text="CheckBox" />
+         <Text layoutX="644.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adicional admi" wrappingWidth="140.845703125">
+            <font>
+               <Font size="15.0" />
+            </font>
+         </Text>
+         <Text layoutX="644.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adicional perfumeria" wrappingWidth="140.845703125">
+            <font>
+               <Font size="15.0" />
+            </font>
+         </Text>
+         <Text layoutX="644.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adicional cajero" wrappingWidth="140.845703125">
+            <font>
+               <Font size="15.0" />
+            </font>
+         </Text>
+         <Text layoutX="644.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adicional auxiliar de farmacia" wrappingWidth="225.5999999999999">
+            <font>
+               <Font size="15.0" />
+            </font>
+         </Text>
+         <Text layoutX="644.0" layoutY="258.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adicional titulo secundario" wrappingWidth="225.5999999999999">
+            <font>
+               <Font size="15.0" />
+            </font>
+         </Text>
+         <Text layoutX="644.0" layoutY="298.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jornada reducida" wrappingWidth="225.5999999999999">
+            <font>
+               <Font size="15.0" />
+            </font>
+         </Text>
+         <CheckBox contentDisplay="GRAPHIC_ONLY" layoutX="1000.0" layoutY="283.0" mnemonicParsing="false" text="CheckBox" />
+         <CheckBox contentDisplay="GRAPHIC_ONLY" layoutX="1000.0" layoutY="243.0" mnemonicParsing="false" text="CheckBox" />
+         <CheckBox contentDisplay="GRAPHIC_ONLY" layoutX="1000.0" layoutY="195.0" mnemonicParsing="false" text="CheckBox" />
+         <CheckBox contentDisplay="GRAPHIC_ONLY" layoutX="1000.0" layoutY="146.0" mnemonicParsing="false" text="CheckBox" />
+         <CheckBox contentDisplay="GRAPHIC_ONLY" layoutX="1000.0" layoutY="105.0" mnemonicParsing="false" text="CheckBox" />
+         <CheckBox contentDisplay="GRAPHIC_ONLY" layoutX="1000.0" layoutY="66.0" mnemonicParsing="false" text="CheckBox" />
+         <TextField layoutX="794.0" layoutY="280.0" prefHeight="5.0" prefWidth="150.0" />
       </AnchorPane>
    </children>
 </AnchorPane>
