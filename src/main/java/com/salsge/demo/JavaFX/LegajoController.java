@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Component
 public class LegajoController {
@@ -50,36 +51,45 @@ public class LegajoController {
     public LegajoController() {
     }
 
-    public void buildLegajoFromForm() {
+    public Legajo buildLegajoFromForm() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
         Legajo legajo = new Legajo();
 
         legajo.setEmployee(employee);
         legajo.setNumeroDeLegajo(Integer.valueOf(legajoField.getText()));
-        legajo.setDireccion(apellidoField.getText());
-        legajo.setNumeroDeDireccion(Integer.valueOf(nombreField.getText()));
-        legajo.setPiso(Integer.valueOf(direccionField.getText()));
-        legajo.setDepto(Integer.valueOf(numeroDireccionField.getText()));
-        legajo.setCodigoPostal(pisoField.getText());
-        legajo.setLocalidad(deptoField.getText());
-        legajo.setDni(codigoPostalField.getText());
-        legajo.setCuit(localidadField.getText());
-        legajo.setTelefono(cuitField.getText());
-        legajo.setTelefonoDeEmergencia(dniField.getText());
-        legajo.setEmail(telefonoField.getText());
-        legajo.setFechaDeNacimiento(LocalDate.parse(telefonoEmergenciaField.getText()));
-        legajo.setFechaDeIngreso(LocalDate.parse(mailField.getText()));
-        legajo.setSexo(nacimientoField.getText());
-        legajo.setEstadoCivil(sexoField.getText());
-        legajo.setCbu(estadoCivilField.getText());
-        legajo.setCta(cbuField.getText());
-        legajo.setBanco(ctaField.getText());
-        legajo.setSueldo(BigDecimal.valueOf(Integer.parseInt(bancoField.getText())));
-        legajo.setTipoEmpleado(ingresoField.getText());
-        legajo.setConvenio(antiguedadField.getText());
-        legajo.setObraSocial(tipoEmpleadoField.getText());
+        legajo.setDireccion(direccionField.getText());
+        legajo.setNumeroDeDireccion(Integer.valueOf(numeroDireccionField.getText()));
+        legajo.setPiso(Integer.valueOf(pisoField.getText()));
+        legajo.setDepto(Integer.valueOf(deptoField.getText()));
+        legajo.setCodigoPostal(codigoPostalField.getText());
+        legajo.setLocalidad(localidadField.getText());
+        legajo.setDni(dniField.getText());
+        legajo.setCuit(cuitField.getText());
+        legajo.setTelefono(telefonoField.getText());
+        legajo.setTelefonoDeEmergencia(telefonoEmergenciaField.getText());
+        legajo.setEmail(mailField.getText());
+        legajo.setFechaDeNacimiento(LocalDate.parse(nacimientoField.getText(), formatter));
+        legajo.setFechaDeIngreso(LocalDate.parse(ingresoField.getText(), formatter));
+        legajo.setSexo(sexoField.getText());
+        legajo.setEstadoCivil(estadoCivilField.getText());
+        legajo.setCbu(cbuField.getText());
+        legajo.setCta(ctaField.getText());
+        legajo.setBanco(bancoField.getText());
+        legajo.setSueldo(BigDecimal.valueOf(Integer.parseInt(sueldoField.getText())));
+        legajo.setTipoEmpleado(tipoEmpleadoField.getText());
+        legajo.setConvenio(convenioField.getText());
+        legajo.setObraSocial(obraSocialField.getText());
+
+        return legajo;
 
     };
 
+    public void createLegajo() {
+        Legajo legajo = buildLegajoFromForm();
+        employee.assignLegajo(legajo);
+        legajoService.createLegajo(employee.getId(), legajo);
+    }
 
     // Getters and setters
     public Employee getEmployee() {
