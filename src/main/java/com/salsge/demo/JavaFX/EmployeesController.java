@@ -13,12 +13,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.StackPane;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
 @Component
 public class EmployeesController {
+
+    @Autowired
+    private ApplicationContext applicationContext;
 
     @Autowired
     EmployeeService employeeService;
@@ -31,6 +35,8 @@ public class EmployeesController {
     private void loadLegajoView(Employee employee) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/Legajo.fxml"));
+            loader.setControllerFactory(applicationContext::getBean);
+
             Parent view = loader.load();
 
             LegajoController controller = loader.getController();
