@@ -1,6 +1,7 @@
 package com.salsge.demo.JavaFX;
 
 import com.salsge.demo.Employees.Employee;
+import com.salsge.demo.Employees.EmployeeService;
 import com.salsge.demo.Legajo.Legajo;
 import com.salsge.demo.Legajo.LegajoService;
 import javafx.fxml.FXML;
@@ -18,6 +19,8 @@ public class LegajoController {
     Employee employee;
     @Autowired
     LegajoService legajoService;
+    @Autowired
+    EmployeeService employeeService;
 
     @FXML
     private TextField legajoField;
@@ -58,6 +61,10 @@ public class LegajoController {
 
         legajo.setEmployee(employee);
         legajo.setNumeroDeLegajo(Integer.valueOf(legajoField.getText()));
+
+        legajo.setLastNames(apellidoField.getText());
+        legajo.setNames(nombreField.getText());
+
         legajo.setDireccion(direccionField.getText());
         legajo.setNumeroDeDireccion(Integer.valueOf(numeroDireccionField.getText()));
         legajo.setPiso(Integer.valueOf(pisoField.getText()));
@@ -87,7 +94,16 @@ public class LegajoController {
 
     public void createLegajo() {
         Legajo legajo = buildLegajoFromForm();
+
+        // Legajo created for first time
+        if(employee == null) {
+            //Crear el empleado
+            String employeeFullName = legajo.getNames() + " " + legajo.getLastNames();
+            setEmployee(employeeService.createEmployee(employeeFullName));
+        }
+
         employee.assignLegajo(legajo);
+
         legajoService.createLegajo(employee.getId(), legajo);
     }
 
