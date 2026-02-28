@@ -49,6 +49,22 @@ public class EmployeesController {
         }
     }
 
+    private void loadLegajoView() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/Legajo.fxml"));
+            loader.setControllerFactory(applicationContext::getBean);
+
+            Parent view = loader.load();
+
+            LegajoController controller = loader.getController();
+
+            legajoContainer.getChildren().setAll(view);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @FXML
     public void renderAllEmployees(String employeeFullName) {
         colFullName.setCellValueFactory(new PropertyValueFactory<>("fullName"));
@@ -57,6 +73,8 @@ public class EmployeesController {
 
     @FXML
     public void initialize() {
+        loadLegajoView();
+
         employeeName.textProperty().addListener((observable, oldValue, newValue) -> {
             System.out.println(newValue);
             renderAllEmployees(newValue);
