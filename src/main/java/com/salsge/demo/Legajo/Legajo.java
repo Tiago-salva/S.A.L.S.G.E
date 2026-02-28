@@ -20,6 +20,9 @@ public class Legajo {
 
     private Integer numeroDeLegajo;
 
+    private String lastNames;
+    private String names;
+
     private String direccion;
     private Integer numeroDeDireccion;
     private Integer piso;
@@ -88,6 +91,22 @@ public class Legajo {
 
     public void setNumeroDeLegajo(Integer numeroDeLegajo) {
         this.numeroDeLegajo = numeroDeLegajo;
+    }
+
+    public String getLastNames() {
+        return lastNames;
+    }
+
+    public void setLastNames(String lastNames) {
+        this.lastNames = lastNames;
+    }
+
+    public String getNames() {
+        return names;
+    }
+
+    public void setNames(String names) {
+        this.names = names;
     }
 
     public String getDireccion() {
