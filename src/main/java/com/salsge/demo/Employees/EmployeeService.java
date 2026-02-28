@@ -28,10 +28,10 @@ import java.util.Optional;
             return employeeRepository.findById(id);
         }
 
-        public void createEmployee(String employeeFullName) {
+        public Employee createEmployee(String employeeFullName) {
 
             Employee employee = new Employee(employeeFullName);
-            employeeRepository.save(employee);
+            return employeeRepository.save(employee);
         }
 
         public void updateEmployee(Long id, String employeeFullName) {
