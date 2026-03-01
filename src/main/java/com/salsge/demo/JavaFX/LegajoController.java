@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
 
 @Component
@@ -60,7 +61,7 @@ public class LegajoController {
         Legajo legajo = new Legajo();
 
         legajo.setEmployee(employee);
-        legajo.setNumeroDeLegajo(Integer.valueOf(legajoField.getText()));
+        legajo.setNumeroDeLegajo(legajoField.getText());
 
         legajo.setLastNames(apellidoField.getText());
         legajo.setNames(nombreField.getText());
@@ -107,6 +108,40 @@ public class LegajoController {
         legajoService.createLegajo(employee.getId(), legajo);
     }
 
+    public void loadData() {
+        if (employee == null || employee.getLegajo() == null) return;
+
+        Legajo legajo = employee.getLegajo();
+
+        legajoField.setText(String.valueOf(legajo.getNumeroDeLegajo()));
+        apellidoField.setText(legajo.getLastNames());
+        nombreField.setText(legajo.getNames());
+        direccionField.setText(legajo.getDireccion());
+        numeroDireccionField.setText(String.valueOf(legajo.getNumeroDeDireccion()));
+        pisoField.setText(String.valueOf(legajo.getPiso()));
+        deptoField.setText(String.valueOf(legajo.getDepto()));
+        codigoPostalField.setText(legajo.getCodigoPostal());
+        localidadField.setText(legajo.getLocalidad());
+        cuitField.setText(legajo.getCuit());
+        dniField.setText(legajo.getDni());
+        telefonoField.setText(legajo.getTelefono());
+        telefonoEmergenciaField.setText(legajo.getTelefonoDeEmergencia());
+        mailField.setText(legajo.getEmail());
+        nacimientoField.setText(String.valueOf(legajo.getFechaDeNacimiento()));
+        sexoField.setText(legajo.getSexo());
+        estadoCivilField.setText(legajo.getEstadoCivil());
+        cbuField.setText(legajo.getCbu());
+        ctaField.setText(legajo.getCta());
+        bancoField.setText(legajo.getBanco());
+        ingresoField.setText(String.valueOf(legajo.getFechaDeIngreso()));
+        antiguedadField.setText(String.valueOf((Period.between(legajo.getFechaDeIngreso(), LocalDate.now()).getYears())));
+        tipoEmpleadoField.setText(legajo.getTipoEmpleado());
+        sueldoField.setText(String.valueOf(legajo.getSueldo()));
+        convenioField.setText(legajo.getConvenio());
+        obraSocialField.setText(legajo.getObraSocial());
+
+    }
+
     // Getters and setters
     public Employee getEmployee() {
         return employee;
@@ -114,5 +149,6 @@ public class LegajoController {
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
+        loadData();
     }
 }
