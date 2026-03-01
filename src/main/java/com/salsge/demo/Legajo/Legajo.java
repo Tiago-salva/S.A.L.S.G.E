@@ -18,7 +18,7 @@ public class Legajo {
 
     private Employee employee;
 
-    private Integer numeroDeLegajo;
+    private String numeroDeLegajo;
 
     private String lastNames;
     private String names;
@@ -56,13 +56,13 @@ public class Legajo {
     // Constructores
     public Legajo() {};
 
-    public Legajo(Long id, Employee employee, Integer numeroDeLegajo) {
+    public Legajo(Long id, Employee employee, String numeroDeLegajo) {
         this.id = id;
         this.employee = employee;
         this.numeroDeLegajo = numeroDeLegajo;
     }
 
-    public Legajo(Employee employee, Integer numeroDeLegajo) {
+    public Legajo(Employee employee, String numeroDeLegajo) {
         this.employee = employee;
         this.numeroDeLegajo = numeroDeLegajo;
     }
@@ -85,11 +85,11 @@ public class Legajo {
         this.employee = employee;
     }
 
-    public Integer getNumeroDeLegajo() {
+    public String getNumeroDeLegajo() {
         return numeroDeLegajo;
     }
 
-    public void setNumeroDeLegajo(Integer numeroDeLegajo) {
+    public void setNumeroDeLegajo(String numeroDeLegajo) {
         this.numeroDeLegajo = numeroDeLegajo;
     }
 
