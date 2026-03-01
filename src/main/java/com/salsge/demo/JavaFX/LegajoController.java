@@ -5,11 +5,14 @@ import com.salsge.demo.Employees.EmployeeService;
 import com.salsge.demo.Legajo.Legajo;
 import com.salsge.demo.Legajo.LegajoService;
 import javafx.fxml.FXML;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
@@ -38,13 +41,13 @@ public class LegajoController {
     @FXML private TextField telefonoField;
     @FXML private TextField telefonoEmergenciaField;
     @FXML private TextField mailField;
-    @FXML private TextField nacimientoField;
+    @FXML private DatePicker nacimientoField;
     @FXML private TextField sexoField;
     @FXML private TextField estadoCivilField;
     @FXML private TextField cbuField;
     @FXML private TextField ctaField;
     @FXML private TextField bancoField;
-    @FXML private TextField ingresoField;
+    @FXML private DatePicker ingresoField;
     @FXML private TextField antiguedadField;
     @FXML private TextField tipoEmpleadoField;
     @FXML private TextField sueldoField;
@@ -55,7 +58,10 @@ public class LegajoController {
     public LegajoController() {
     }
 
-    public Legajo buildLegajoFromForm() {
+    private static final DecimalFormat MONEY_FORMAT =
+            new DecimalFormat("#0.00");
+
+    public Legajo buildLegajoFromForm() throws ParseException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         Legajo legajo = new Legajo();
@@ -77,14 +83,14 @@ public class LegajoController {
         legajo.setTelefono(telefonoField.getText());
         legajo.setTelefonoDeEmergencia(telefonoEmergenciaField.getText());
         legajo.setEmail(mailField.getText());
-        legajo.setFechaDeNacimiento(LocalDate.parse(nacimientoField.getText(), formatter));
-        legajo.setFechaDeIngreso(LocalDate.parse(ingresoField.getText(), formatter));
+        legajo.setFechaDeNacimiento(nacimientoField.getValue());
+        legajo.setFechaDeIngreso(ingresoField.getValue());
         legajo.setSexo(sexoField.getText());
         legajo.setEstadoCivil(estadoCivilField.getText());
         legajo.setCbu(cbuField.getText());
         legajo.setCta(ctaField.getText());
         legajo.setBanco(bancoField.getText());
-        legajo.setSueldo(BigDecimal.valueOf(Integer.parseInt(sueldoField.getText())));
+        legajo.setSueldo(BigDecimal.valueOf(MONEY_FORMAT.parse(sueldoField.getText()).doubleValue()));
         legajo.setTipoEmpleado(tipoEmpleadoField.getText());
         legajo.setConvenio(convenioField.getText());
         legajo.setObraSocial(obraSocialField.getText());
@@ -93,19 +99,49 @@ public class LegajoController {
 
     };
 
-    public void createLegajo() {
+    public void createLegajo() throws ParseException {
         Legajo legajo = buildLegajoFromForm();
 
-        // Legajo created for first time
+        // If a legajo is created for the first time
         if(employee == null) {
-            //Crear el empleado
+            // Create the employee
             String employeeFullName = legajo.getNames() + " " + legajo.getLastNames();
             setEmployee(employeeService.createEmployee(employeeFullName));
+
+            employee.assignLegajo(legajo);
+
+            legajoService.createLegajo(employee.getId(), legajo);
         }
+        // An employee is selected
+        else {
+            setEmployee(null);
+            createLegajo();
+        }
+    }
 
-        employee.assignLegajo(legajo);
+    public void editLegajo() throws ParseException {
 
-        legajoService.createLegajo(employee.getId(), legajo);
+        // If there's a employee selected, then the legajo exists
+        if(employee != null) {
+
+            // Get id of the legajo to edit
+            Legajo legajo = employee.getLegajo();
+            Long legajoId = legajo.getId();
+
+            // Get the new legajo data
+            Legajo legajoData = buildLegajoFromForm();
+
+            legajoService.editLegajo(legajoId, legajoData);
+
+            // Refresh the employee data
+            Long employeeId = employee.getId();
+            String employeeFullName = legajoData.getNames() + " " + legajoData.getLastNames();
+
+            employeeService.editEmployee(employeeId, employeeFullName);
+
+        } else {
+            System.out.println("There's no legajo selected to edit, first select one");
+        }
     }
 
     public void loadData() {
@@ -127,13 +163,13 @@ public class LegajoController {
         telefonoField.setText(legajo.getTelefono());
         telefonoEmergenciaField.setText(legajo.getTelefonoDeEmergencia());
         mailField.setText(legajo.getEmail());
-        nacimientoField.setText(String.valueOf(legajo.getFechaDeNacimiento()));
+        nacimientoField.setValue(legajo.getFechaDeNacimiento());
         sexoField.setText(legajo.getSexo());
         estadoCivilField.setText(legajo.getEstadoCivil());
         cbuField.setText(legajo.getCbu());
         ctaField.setText(legajo.getCta());
         bancoField.setText(legajo.getBanco());
-        ingresoField.setText(String.valueOf(legajo.getFechaDeIngreso()));
+        ingresoField.setValue(legajo.getFechaDeIngreso());
         antiguedadField.setText(String.valueOf((Period.between(legajo.getFechaDeIngreso(), LocalDate.now()).getYears())));
         tipoEmpleadoField.setText(legajo.getTipoEmpleado());
         sueldoField.setText(String.valueOf(legajo.getSueldo()));
