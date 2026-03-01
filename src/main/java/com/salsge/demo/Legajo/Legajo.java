@@ -18,6 +18,7 @@ public class Legajo {
 
     private Employee employee;
 
+    @Column(unique = true)
     private String numeroDeLegajo;
 
     private String lastNames;
