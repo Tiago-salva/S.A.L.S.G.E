@@ -1,9 +1,5 @@
 package com.salsge.demo.Employees;
 
-import java.sql.Date;
-import java.util.Scanner;
-
-import com.salsge.demo.Legajo.Legajo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,7 +34,7 @@ import java.util.Optional;
             return employeeRepository.save(employee);
         }
 
-        public void updateEmployee(Long id, String employeeFullName) {
+        public void editEmployee(Long id, String employeeFullName) {
             Employee employee = getEmployee(id)
                     .orElseThrow(() -> new RuntimeException("Employee not found"));
 
