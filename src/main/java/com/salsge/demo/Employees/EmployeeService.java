@@ -20,8 +20,12 @@ import java.util.Optional;
             return employeeRepository.findAll();
         }
 
-        public List<Employee> getEmployeeByName(String fullName) {
+        public List<Employee> getAllEmployeesByName(String fullName) {
             return employeeRepository.findByFullNameContainingIgnoreCase(fullName);
+        }
+
+        public List<Employee> getAllEmployeesByLegajo(String legajoNumber) {
+            return employeeRepository.findDistinctByLegajoNumeroDeLegajoContaining(legajoNumber);
         }
 
         public Optional<Employee> getEmployee(Long id) {
