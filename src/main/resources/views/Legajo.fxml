@@ -278,6 +278,11 @@
          <Line endX="353.39990234375" layoutX="701.0" layoutY="747.0" startX="-701.0" />
          <DatePicker fx:id="nacimientoField" layoutX="176.0" layoutY="406.0" prefHeight="26.0" prefWidth="150.0" />
          <DatePicker fx:id="ingresoField" layoutX="152.0" layoutY="578.0" />
+         <Button fx:id="clearButton" layoutX="307.0" layoutY="780.0" mnemonicParsing="false" onAction="#clearLegajo" prefHeight="35.0" prefWidth="106.0" text="Limpiar">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Button>
       </AnchorPane>
    </children>
 </AnchorPane>
