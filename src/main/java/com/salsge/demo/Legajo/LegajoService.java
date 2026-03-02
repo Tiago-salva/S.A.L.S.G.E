@@ -3,10 +3,13 @@ package com.salsge.demo.Legajo;
 import com.salsge.demo.Employees.Employee;
 import com.salsge.demo.Employees.EmployeeRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 import java.util.Optional;
 
+@Validated
 @Service
 public class LegajoService {
 
@@ -26,10 +29,19 @@ public class LegajoService {
         return legajoRepository.findById(id);
     }
 
-    public void createLegajo(Long employeeId, Legajo legajoData) {
-        // Realizar comprobaciones
+    @Transactional
+    public void createLegajo(Legajo legajo) {
 
-        legajoRepository.save(legajoData);
+            String employeeFullName = legajo.getNames() + " " + legajo.getLastNames();
+
+            Employee employee = new Employee(employeeFullName);
+
+            legajo.setEmployee(employee);
+            employee.assignLegajo(legajo);
+
+            employeeRepository.save(employee);
+
+            // legajoRepository.save(legajoData);
     }
 
     public void editLegajo(Long legajoId, Legajo legajoData) {
