@@ -2,6 +2,7 @@ package com.salsge.demo.Legajo;
 
 import com.salsge.demo.Employees.Employee;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -18,40 +19,99 @@ public class Legajo {
 
     private Employee employee;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
+    @NotBlank
     private String numeroDeLegajo;
 
+    @NotBlank
+    @Column(nullable = false)
     private String lastNames;
+
+    @NotBlank
+    @Column(nullable = false)
     private String names;
 
+    @NotBlank
+    @Column(nullable = false)
     private String direccion;
+
+    @NotBlank
+    @Column(nullable = false)
     private Integer numeroDeDireccion;
+
     private Integer piso;
     private Integer depto;
+
+    @NotBlank
+    @Column(nullable = false)
     private String codigoPostal;
+
+    @NotBlank
+    @Column(nullable = false)
     private String localidad;
 
+    @NotBlank
+    @Column(nullable = false)
     private String dni;
+
+    @NotBlank
+    @Column(nullable = false)
     private String cuit;
 
+    @NotBlank
+    @Column(nullable = false)
     private String telefono;
+
+    @NotBlank
+    @Column(nullable = false)
     private String telefonoDeEmergencia;
+
+    @NotBlank
+    @Column(nullable = false)
     private String email;
 
+    @NotBlank
+    @Column(nullable = false)
     private LocalDate fechaDeNacimiento;
+
+    @NotBlank
+    @Column(nullable = false)
     private LocalDate fechaDeIngreso;
 
+    @NotBlank
+    @Column(nullable = false)
     private String sexo;
+
+    @NotBlank
+    @Column(nullable = false)
     private String estadoCivil;
 
+    @NotBlank
+    @Column(nullable = false)
     private String cbu;
+
+    @NotBlank
+    @Column(nullable = false)
     private String cta;
+
+    @NotBlank
+    @Column(nullable = false)
     private String banco;
 
+    @NotBlank
+    @Column(nullable = false)
     private BigDecimal sueldo;
 
+    @NotBlank
+    @Column(nullable = false)
     private String tipoEmpleado;
+
+    @NotBlank
+    @Column(nullable = false)
     private String convenio;
+
+    @NotBlank
+    @Column(nullable = false)
     private String obraSocial;
 
     // Constructores
