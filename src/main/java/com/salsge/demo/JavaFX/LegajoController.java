@@ -66,7 +66,6 @@ public class LegajoController {
 
         Legajo legajo = new Legajo();
 
-        legajo.setEmployee(employee);
         legajo.setNumeroDeLegajo(legajoField.getText());
 
         legajo.setLastNames(apellidoField.getText());
@@ -102,21 +101,7 @@ public class LegajoController {
     public void createLegajo() throws ParseException {
         Legajo legajo = buildLegajoFromForm();
 
-        // If a legajo is created for the first time
-        if(employee == null) {
-            // Create the employee
-            String employeeFullName = legajo.getNames() + " " + legajo.getLastNames();
-            setEmployee(employeeService.createEmployee(employeeFullName));
-
-            employee.assignLegajo(legajo);
-
-            legajoService.createLegajo(employee.getId(), legajo);
-        }
-        // An employee is selected
-        else {
-            setEmployee(null);
-            createLegajo();
-        }
+        legajoService.createLegajo(legajo);
     }
 
     public void editLegajo() throws ParseException {
@@ -142,6 +127,38 @@ public class LegajoController {
         } else {
             System.out.println("There's no legajo selected to edit, first select one");
         }
+    }
+
+    public void clearLegajo() {
+        setEmployee(null);
+
+        legajoField.setText("");
+        apellidoField.setText("");
+        nombreField.setText("");
+        direccionField.setText("");
+        numeroDireccionField.setText("");
+        pisoField.setText("");
+        deptoField.setText("");
+        codigoPostalField.setText("");
+        localidadField.setText("");
+        cuitField.setText("");
+        dniField.setText("");
+        telefonoField.setText("");
+        telefonoEmergenciaField.setText("");
+        mailField.setText("");
+        nacimientoField.setValue(null);
+        sexoField.setText("");
+        estadoCivilField.setText("");
+        cbuField.setText("");
+        ctaField.setText("");
+        bancoField.setText("");
+        ingresoField.setValue(null);
+        antiguedadField.setText("");
+        tipoEmpleadoField.setText("");
+        sueldoField.setText("");
+        convenioField.setText("");
+        obraSocialField.setText("");
+
     }
 
     public void loadData() {
