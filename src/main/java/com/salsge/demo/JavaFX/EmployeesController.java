@@ -79,6 +79,12 @@ public class EmployeesController {
         allEmployeesView.setItems(FXCollections.observableArrayList(employeeService.getAllEmployeesByName(employeeFullName)));
     }
 
+    @FXML
+    public void renderAllEmployees() {
+        colFullName.setCellValueFactory(new PropertyValueFactory<>("fullName"));
+        allEmployeesView.setItems(FXCollections.observableArrayList(employeeService.getAllEmployees()));
+    }
+
     // Render all employees using their legajo number
     @FXML
     public void renderAllEmployeesByLegajo(String legajoNumber) {
@@ -90,6 +96,11 @@ public class EmployeesController {
     @FXML
     public void initialize() {
         loadLegajoView();
+
+        colFullName.setCellValueFactory(new PropertyValueFactory<>("fullName"));
+        allEmployeesView.setItems(FXCollections.observableArrayList(employeeService.getAllEmployees()));
+
+        renderAllEmployees();
 
         // Event listener for the fullName textfield
         // Search employees containing the same letters as the textField
