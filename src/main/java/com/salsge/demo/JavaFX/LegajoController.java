@@ -4,21 +4,28 @@ import com.salsge.demo.Employees.Employee;
 import com.salsge.demo.Employees.EmployeeService;
 import com.salsge.demo.Legajo.Legajo;
 import com.salsge.demo.Legajo.LegajoService;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.net.URL;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import java.util.ResourceBundle;
 
 @Component
-public class LegajoController {
+public class LegajoController implements Initializable {
 
     Employee employee;
     @Autowired
@@ -42,13 +49,19 @@ public class LegajoController {
     @FXML private TextField telefonoEmergenciaField;
     @FXML private TextField mailField;
     @FXML private DatePicker nacimientoField;
-    @FXML private TextField sexoField;
-    @FXML private TextField estadoCivilField;
+
+    @FXML private ChoiceBox<String> sexoField;
+    @FXML private ChoiceBox<String> estadoCivilField;
+
+    private ObservableList<String> sexoOptions = FXCollections.observableArrayList("Masculino", "Femenino", "No especificar");
+    private ObservableList<String> estadoCivilOptions = FXCollections.observableArrayList("Casado/a", "Soltero/a", "Viudo/a", "No especificar");
+
     @FXML private TextField cbuField;
     @FXML private TextField ctaField;
     @FXML private TextField bancoField;
     @FXML private DatePicker ingresoField;
-    @FXML private TextField antiguedadField;
+    @FXML private Text antiguedadEmpresaField;
+    @FXML private TextField antiguedadReconocidaField;
     @FXML private TextField tipoEmpleadoField;
     @FXML private TextField sueldoField;
     @FXML private TextField convenioField;
@@ -60,6 +73,12 @@ public class LegajoController {
 
     private static final DecimalFormat MONEY_FORMAT =
             new DecimalFormat("#0.00");
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        sexoField.setItems(sexoOptions);
+        estadoCivilField.setItems(estadoCivilOptions);
+    }
 
     public Legajo buildLegajoFromForm() throws ParseException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -84,8 +103,9 @@ public class LegajoController {
         legajo.setEmail(mailField.getText());
         legajo.setFechaDeNacimiento(nacimientoField.getValue());
         legajo.setFechaDeIngreso(ingresoField.getValue());
-        legajo.setSexo(sexoField.getText());
-        legajo.setEstadoCivil(estadoCivilField.getText());
+        legajo.setAntiguedadReconocida(Integer.valueOf(antiguedadReconocidaField.getText()));
+        legajo.setSexo(sexoField.getValue());
+        legajo.setEstadoCivil(estadoCivilField.getValue());
         legajo.setCbu(cbuField.getText());
         legajo.setCta(ctaField.getText());
         legajo.setBanco(bancoField.getText());
@@ -147,13 +167,14 @@ public class LegajoController {
         telefonoEmergenciaField.setText("");
         mailField.setText("");
         nacimientoField.setValue(null);
-        sexoField.setText("");
-        estadoCivilField.setText("");
+        sexoField.setValue("");
+        estadoCivilField.setValue("");
         cbuField.setText("");
         ctaField.setText("");
         bancoField.setText("");
         ingresoField.setValue(null);
-        antiguedadField.setText("");
+        antiguedadEmpresaField.setText("");
+        antiguedadReconocidaField.setText("");
         tipoEmpleadoField.setText("");
         sueldoField.setText("");
         convenioField.setText("");
@@ -181,13 +202,14 @@ public class LegajoController {
         telefonoEmergenciaField.setText(legajo.getTelefonoDeEmergencia());
         mailField.setText(legajo.getEmail());
         nacimientoField.setValue(legajo.getFechaDeNacimiento());
-        sexoField.setText(legajo.getSexo());
-        estadoCivilField.setText(legajo.getEstadoCivil());
+        sexoField.setValue(legajo.getSexo());
+        estadoCivilField.setValue(legajo.getEstadoCivil());
         cbuField.setText(legajo.getCbu());
         ctaField.setText(legajo.getCta());
         bancoField.setText(legajo.getBanco());
         ingresoField.setValue(legajo.getFechaDeIngreso());
-        antiguedadField.setText(String.valueOf((Period.between(legajo.getFechaDeIngreso(), LocalDate.now()).getYears())));
+        antiguedadEmpresaField.setText(String.valueOf((Period.between(legajo.getFechaDeIngreso(), LocalDate.now()).getYears())));
+        antiguedadReconocidaField.setText(String.valueOf(legajo.getAntiguedadReconocida()));
         tipoEmpleadoField.setText(legajo.getTipoEmpleado());
         sueldoField.setText(String.valueOf(legajo.getSueldo()));
         convenioField.setText(legajo.getConvenio());
