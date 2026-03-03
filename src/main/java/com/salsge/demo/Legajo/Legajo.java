@@ -3,6 +3,9 @@ package com.salsge.demo.Legajo;
 import com.salsge.demo.Employees.Employee;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -35,11 +38,13 @@ public class Legajo {
     @Column(nullable = false)
     private String direccion;
 
-    @NotBlank
+    @Positive
     @Column(nullable = false)
     private Integer numeroDeDireccion;
 
+    @Positive
     private Integer piso;
+    @Positive
     private Integer depto;
 
     @NotBlank
@@ -70,13 +75,17 @@ public class Legajo {
     @Column(nullable = false)
     private String email;
 
-    @NotBlank
+    @NotNull
     @Column(nullable = false)
     private LocalDate fechaDeNacimiento;
 
-    @NotBlank
+    @NotNull
     @Column(nullable = false)
     private LocalDate fechaDeIngreso;
+
+    @PositiveOrZero
+    @Column(nullable = false)
+    private Integer antiguedadReconocida;
 
     @NotBlank
     @Column(nullable = false)
@@ -98,7 +107,8 @@ public class Legajo {
     @Column(nullable = false)
     private String banco;
 
-    @NotBlank
+    @NotNull
+    @Positive
     @Column(nullable = false)
     private BigDecimal sueldo;
 
@@ -117,13 +127,13 @@ public class Legajo {
     // Constructores
     public Legajo() {};
 
-    public Legajo(Long id, Employee employee, String numeroDeLegajo) {
+    public Legajo(Long id, Employee employee, String numeroDeLegajo, Integer antiguedadReconocida) {
         this.id = id;
         this.employee = employee;
         this.numeroDeLegajo = numeroDeLegajo;
     }
 
-    public Legajo(Employee employee, String numeroDeLegajo) {
+    public Legajo(Employee employee, String numeroDeLegajo, Integer antiguedadReconocida) {
         this.employee = employee;
         this.numeroDeLegajo = numeroDeLegajo;
     }
@@ -272,6 +282,14 @@ public class Legajo {
 
     public void setFechaDeIngreso(LocalDate fechaDeIngreso) {
         this.fechaDeIngreso = fechaDeIngreso;
+    }
+
+    public @PositiveOrZero Integer getAntiguedadReconocida() {
+        return antiguedadReconocida;
+    }
+
+    public void setAntiguedadReconocida(@PositiveOrZero Integer antiguedadReconocida) {
+        this.antiguedadReconocida = antiguedadReconocida;
     }
 
     public String getSexo() {
