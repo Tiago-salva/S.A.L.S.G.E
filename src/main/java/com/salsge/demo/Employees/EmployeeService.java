@@ -29,6 +29,10 @@ import java.util.Optional;
         public Optional<Employee> getEmployee(Long id) {
             return employeeRepository.findById(id);
         }
+        
+        public Optional<Employee> getEmployeeByLegajo(String legajoNumber) {
+            return employeeRepository.findByLegajoNumeroDeLegajoIgnoreCase(legajoNumber);
+        }
 
         public Employee createEmployee(String employeeFullName) {
 
