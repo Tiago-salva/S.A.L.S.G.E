@@ -1,32 +1,110 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="584.0" prefWidth="824.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="725.0" prefWidth="1120.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.salsge.demo.JavaFX.NovedadesController">
    <children>
-      <Text layoutX="246.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingreso de novedades">
+      <Text layoutX="394.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingreso de novedades">
          <font>
             <Font size="34.0" />
          </font>
       </Text>
-      <TableView layoutY="92.0" prefHeight="494.0" prefWidth="824.0">
-        <columns>
-          <TableColumn prefWidth="75.0" text="Legajo" />
-          <TableColumn prefWidth="75.0" text="Colaborador" />
-            <TableColumn prefWidth="75.0" text="Codigo" />
-            <TableColumn prefWidth="75.0" text="Concepto" />
-            <TableColumn prefWidth="75.0" text="H" />
-            <TableColumn prefWidth="75.0" text="D" />
-            <TableColumn prefWidth="108.7999267578125" text="Importe" />
-        </columns>
-         <columnResizePolicy>
-            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-         </columnResizePolicy>
-      </TableView>
+      <GridPane alignment="TOP_CENTER" gridLinesVisible="true" layoutY="106.0" prefHeight="619.0" prefWidth="1120.0" style="-fx-background-color: #e8e7e3;">
+        <columnConstraints>
+            <ColumnConstraints halignment="CENTER" maxWidth="240.0" minWidth="10.0" prefWidth="184.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="201.0" minWidth="10.0" prefWidth="201.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="174.0" minWidth="10.0" prefWidth="132.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="269.0" minWidth="10.0" prefWidth="207.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="117.0" minWidth="0.0" prefWidth="66.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="122.0" minWidth="10.0" prefWidth="56.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="200.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints maxHeight="259.0" minHeight="10.0" prefHeight="53.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="566.0" minHeight="10.0" prefHeight="566.0" valignment="TOP" vgrow="ALWAYS" />
+        </rowConstraints>
+         <children>
+            <TextField fx:id="novLegajoField" alignment="TOP_LEFT" maxWidth="153.0" minWidth="10.0" prefHeight="25.0" prefWidth="153.0" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets top="20.0" />
+               </GridPane.margin>
+            </TextField>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Legajo" textAlignment="CENTER" wrappingWidth="107.30810546875">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Colaborador" textAlignment="CENTER" wrappingWidth="124.30810546875" GridPane.columnIndex="1">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Codigo" textAlignment="CENTER" wrappingWidth="124.30810546875" GridPane.columnIndex="2">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Concepto" textAlignment="CENTER" wrappingWidth="124.30810546875" GridPane.columnIndex="3">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="H" textAlignment="CENTER" wrappingWidth="124.30810546875" GridPane.columnIndex="4">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="D" textAlignment="CENTER" wrappingWidth="124.30810546875" GridPane.columnIndex="5">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Importe" textAlignment="CENTER" wrappingWidth="124.30810546875" GridPane.columnIndex="6">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Text>
+            <TextField fx:id="novColaboradorField" alignment="TOP_LEFT" editable="false" maxWidth="153.0" minWidth="10.0" prefHeight="25.0" prefWidth="153.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets top="20.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="novCodigoField" alignment="TOP_LEFT" maxWidth="125.0" minWidth="10.0" prefHeight="25.0" prefWidth="117.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets top="20.0" />
+               </GridPane.margin>
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding>
+            </TextField>
+            <TextField fx:id="novConceptoField" alignment="TOP_LEFT" editable="false" maxWidth="202.0" minWidth="10.0" prefHeight="25.0" prefWidth="202.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets top="20.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="novHField" alignment="TOP_LEFT" maxWidth="60.0" minWidth="10.0" prefHeight="25.0" prefWidth="57.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets top="20.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="novDField" alignment="TOP_LEFT" maxWidth="60.0" minWidth="10.0" prefHeight="25.0" prefWidth="153.0" GridPane.columnIndex="5" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets top="20.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="novImporteField" alignment="TOP_LEFT" maxWidth="153.0" minWidth="10.0" prefHeight="25.0" prefWidth="153.0" GridPane.columnIndex="6" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets top="20.0" />
+               </GridPane.margin>
+            </TextField>
+         </children>
+      </GridPane>
    </children>
 </AnchorPane>
