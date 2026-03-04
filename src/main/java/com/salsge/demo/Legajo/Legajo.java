@@ -124,6 +124,41 @@ public class Legajo {
     @Column(nullable = false)
     private String obraSocial;
 
+    @NotBlank
+    @Column(nullable = false)
+    private String puesto;
+
+    @NotBlank
+    @Column(nullable = false)
+    private String categoria;
+
+    @NotBlank
+    @Column(nullable = false)
+    private String area;
+
+    @Positive
+    @Column(nullable = false)
+    private Integer codigoActividad;
+
+    @Positive
+    @Column(nullable = false)
+    private Integer codigoCondicion;
+
+    @Positive
+    @Column(nullable = false)
+    private Integer codigoIncapacidad;
+
+    @NotBlank
+    @Column(nullable = false)
+    private String situacionRevista;
+
+    private Integer codigoZona;
+
+    @NotBlank
+    @Column(nullable = false)
+    private String modalidadTrabajo;
+
+
     // Constructores
     public Legajo() {};
 
