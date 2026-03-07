@@ -398,4 +398,76 @@ public class Legajo {
     public void setObraSocial(String obraSocial) {
         this.obraSocial = obraSocial;
     }
+
+    public @NotBlank String getPuesto() {
+        return puesto;
+    }
+
+    public void setPuesto(@NotBlank String puesto) {
+        this.puesto = puesto;
+    }
+
+    public @NotBlank String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(@NotBlank String categoria) {
+        this.categoria = categoria;
+    }
+
+    public @NotBlank String getArea() {
+        return area;
+    }
+
+    public void setArea(@NotBlank String area) {
+        this.area = area;
+    }
+
+    public @Positive Integer getCodigoActividad() {
+        return codigoActividad;
+    }
+
+    public void setCodigoActividad(@Positive Integer codigoActividad) {
+        this.codigoActividad = codigoActividad;
+    }
+
+    public @Positive Integer getCodigoCondicion() {
+        return codigoCondicion;
+    }
+
+    public void setCodigoCondicion(@Positive Integer codigoCondicion) {
+        this.codigoCondicion = codigoCondicion;
+    }
+
+    public @Positive Integer getCodigoIncapacidad() {
+        return codigoIncapacidad;
+    }
+
+    public void setCodigoIncapacidad(@Positive Integer codigoIncapacidad) {
+        this.codigoIncapacidad = codigoIncapacidad;
+    }
+
+    public @NotBlank String getSituacionRevista() {
+        return situacionRevista;
+    }
+
+    public void setSituacionRevista(@NotBlank String situacionRevista) {
+        this.situacionRevista = situacionRevista;
+    }
+
+    public Integer getCodigoZona() {
+        return codigoZona;
+    }
+
+    public void setCodigoZona(Integer codigoZona) {
+        this.codigoZona = codigoZona;
+    }
+
+    public @NotBlank String getModalidadTrabajo() {
+        return modalidadTrabajo;
+    }
+
+    public void setModalidadTrabajo(@NotBlank String modalidadTrabajo) {
+        this.modalidadTrabajo = modalidadTrabajo;
+    }
 }
