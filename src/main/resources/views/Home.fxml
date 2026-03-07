@@ -2,16 +2,23 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.salsge.demo.JavaFX.MainController">
    <children>
-      <AnchorPane layoutY="8.0" prefHeight="38.0" prefWidth="600.0">
-         <children>
-            <Button fx:id="employeesBtn" layoutX="14.0" layoutY="5.0" mnemonicParsing="false" onAction="#loadEmployeesView" text="Empleados" />
-            <Button layoutX="120.0" layoutY="5.0" mnemonicParsing="false" text="Legajo" />
-            <Button layoutX="211.0" layoutY="5.0" mnemonicParsing="false" text="Liquidacion" />
-            <Button layoutX="324.0" layoutY="5.0" mnemonicParsing="false" text="Novedades" />
-         </children>
-      </AnchorPane>
+      <Text layoutX="218.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="S.A.L.S.G.E" wrappingWidth="164.0">
+         <font>
+            <Font size="34.0" />
+         </font>
+      </Text>
+      <Text layoutX="170.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sistema Automatico de Liquidacion de Sueldos y Gestion de Empleados" textAlignment="CENTER" wrappingWidth="259.2000732421875">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Button fx:id="legajoBtn" layoutX="245.0" layoutY="165.0" mnemonicParsing="false" onAction="#loadEmployeesView" text="Gestionar legajos" />
+      <Button fx:id="liquidacionBtn" layoutX="240.0" layoutY="227.0" mnemonicParsing="false" onAction="#loadPayrollView" text="Generar liquidacion" />
+      <Button fx:id="novedadesBtn" layoutX="240.0" layoutY="287.0" mnemonicParsing="false" onAction="#loadNovedadesView" text="Agregar novedades" />
    </children>
 </AnchorPane>
