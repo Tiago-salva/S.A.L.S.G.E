@@ -32,7 +32,7 @@ public class SalsgeDemoApplication extends Application {
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/Employees.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/Home.fxml"));
 
 		loader.setControllerFactory(applicationContext::getBean);
 
