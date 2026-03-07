@@ -6,10 +6,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
+@Component
 public class MainController {
+
+    @Autowired
+    private ApplicationContext applicationContext;
 
     @FXML
     public void loadEmployeesView(ActionEvent event) throws IOException {
@@ -17,20 +24,19 @@ public class MainController {
     }
 
     public void loadPayrollView() throws IOException {
-        // openFxmlView("/views/Home.fxml", "Employees");
+        openFxmlView("/views/Home.fxml", "Employees");
     }
-    public void loadLegajosView() throws IOException {
-        // openFxmlView("/views/Home.fxml", "Employees");
-    }
+
     public void loadNovedadesView() throws IOException {
-        // openFxmlView("/views/Home.fxml", "Employees");
+        openFxmlView("/views/Novedades.fxml", "Employees");
     }
 
     public void openFxmlView(String path, String title) throws IOException {
         FXMLLoader loader = new FXMLLoader((getClass().getResource(path)));
+        loader.setControllerFactory(applicationContext::getBean);
         Parent root = loader.load();
 
-        Scene scene = new Scene(root, 900, 800);
+        Scene scene = new Scene(root);
 
         Stage stage = new Stage();
         stage.setResizable(false);
