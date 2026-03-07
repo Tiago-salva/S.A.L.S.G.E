@@ -40,6 +40,16 @@ public class NovedadesController implements Initializable {
         novColaboradorField.setText(employee.getFullName());
     }
 
+    public void clearNovedades() {
+        novLegajoField.setText("");
+        novColaboradorField.setText("");
+        novCodigoField.setText("");
+        novConceptoField.setText("");
+        novHField.setText("");
+        novDField.setText("");
+        novImporteField.setText("");
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         novLegajoField.setOnKeyPressed(new EventHandler<KeyEvent>() {
