@@ -67,6 +67,16 @@ public class LegajoController implements Initializable {
     @FXML private TextField convenioField;
     @FXML private TextField obraSocialField;
 
+    @FXML private TextField puestoField;
+    @FXML private TextField categoriaField;
+    @FXML private TextField areaField;
+    @FXML private TextField codActividadField;
+    @FXML private TextField codCondicionField;
+    @FXML private TextField codIncapacidadField;
+    @FXML private TextField situacionRevistaField;
+    @FXML private TextField codZonaField;
+    @FXML private TextField modalidadTrabajoField;
+
     // Constructor
     public LegajoController() {
     }
@@ -113,6 +123,16 @@ public class LegajoController implements Initializable {
         legajo.setTipoEmpleado(tipoEmpleadoField.getText());
         legajo.setConvenio(convenioField.getText());
         legajo.setObraSocial(obraSocialField.getText());
+
+        legajo.setPuesto(puestoField.getText());
+        legajo.setCategoria(categoriaField.getText());
+        legajo.setArea(areaField.getText());
+        legajo.setCodigoActividad(Integer.valueOf(codActividadField.getText()));
+        legajo.setCodigoCondicion(Integer.valueOf(codCondicionField.getText()));
+        legajo.setCodigoIncapacidad(Integer.valueOf(codIncapacidadField.getText()));
+        legajo.setSituacionRevista(situacionRevistaField.getText());
+        legajo.setCodigoZona(Integer.valueOf(codZonaField.getText()));
+        legajo.setModalidadTrabajo(modalidadTrabajoField.getText());
 
         return legajo;
 
@@ -180,6 +200,16 @@ public class LegajoController implements Initializable {
         convenioField.setText("");
         obraSocialField.setText("");
 
+        puestoField.setText("");
+        categoriaField.setText("");
+        areaField.setText("");
+        codActividadField.setText("");
+        codCondicionField.setText("");
+        codIncapacidadField.setText("");
+        situacionRevistaField.setText("");
+        codZonaField.setText("");
+        modalidadTrabajoField.setText("");
+
     }
 
     public void loadData() {
@@ -215,6 +245,15 @@ public class LegajoController implements Initializable {
         convenioField.setText(legajo.getConvenio());
         obraSocialField.setText(legajo.getObraSocial());
 
+        puestoField.setText(legajo.getPuesto());
+        categoriaField.setText(legajo.getCategoria());
+        areaField.setText(legajo.getArea());
+        codActividadField.setText(String.valueOf(legajo.getCodigoActividad()));
+        codCondicionField.setText(String.valueOf(legajo.getCodigoCondicion()));
+        codIncapacidadField.setText(String.valueOf(legajo.getCodigoIncapacidad()));
+        situacionRevistaField.setText(legajo.getSituacionRevista());
+        codZonaField.setText(String.valueOf(legajo.getCodigoZona()));
+        modalidadTrabajoField.setText(legajo.getModalidadTrabajo());
     }
 
     // Getters and setters
