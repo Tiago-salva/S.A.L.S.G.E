@@ -217,7 +217,7 @@
          <CheckBox contentDisplay="GRAPHIC_ONLY" layoutX="1000.0" layoutY="105.0" mnemonicParsing="false" text="CheckBox" />
          <CheckBox contentDisplay="GRAPHIC_ONLY" layoutX="1000.0" layoutY="66.0" mnemonicParsing="false" text="CheckBox" />
          <TextField layoutX="794.0" layoutY="280.0" prefHeight="5.0" prefWidth="150.0" />
-         <TextField fx:id="nacimientoField1" layoutX="854.0" layoutY="406.0" prefHeight="26.0" prefWidth="162.0" />
+         <TextField fx:id="categoriaField" layoutX="854.0" layoutY="406.0" prefHeight="26.0" prefWidth="162.0" />
          <Text layoutX="644.0" layoutY="381.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Puesto" wrappingWidth="149.5999999999999">
             <font>
                <Font size="15.0" />
@@ -228,49 +228,49 @@
                <Font size="15.0" />
             </font>
          </Text>
-         <TextField fx:id="nacimientoField11" layoutX="854.0" layoutY="450.0" prefHeight="26.0" prefWidth="162.0" />
+         <TextField fx:id="areaField" layoutX="854.0" layoutY="450.0" prefHeight="26.0" prefWidth="162.0" />
          <Text layoutX="644.0" layoutY="465.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Departamento / Area" wrappingWidth="149.5999999999999">
             <font>
                <Font size="15.0" />
             </font>
          </Text>
-         <TextField fx:id="nacimientoField111" layoutX="854.0" layoutY="490.0" prefHeight="26.0" prefWidth="162.0" />
+         <TextField fx:id="codActividadField" layoutX="854.0" layoutY="490.0" prefHeight="26.0" prefWidth="162.0" />
          <Text layoutX="644.0" layoutY="510.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Codigo de actividad" wrappingWidth="149.5999999999999">
             <font>
                <Font size="15.0" />
             </font>
          </Text>
-         <TextField fx:id="nacimientoField112" layoutX="854.0" layoutY="533.0" prefHeight="26.0" prefWidth="162.0" />
+         <TextField fx:id="codCondicionField" layoutX="854.0" layoutY="533.0" prefHeight="26.0" prefWidth="162.0" />
          <Text layoutX="644.0" layoutY="552.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Codigo de condicion" wrappingWidth="149.5999999999999">
             <font>
                <Font size="15.0" />
             </font>
          </Text>
-         <TextField fx:id="nacimientoField1121" layoutX="854.0" layoutY="577.0" prefHeight="26.0" prefWidth="162.0" />
+         <TextField fx:id="codIncapacidadField" layoutX="854.0" layoutY="577.0" prefHeight="26.0" prefWidth="162.0" />
          <Text layoutX="644.0" layoutY="591.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Codigo de incapacidades" wrappingWidth="183.1999755859374">
             <font>
                <Font size="15.0" />
             </font>
          </Text>
-         <TextField fx:id="nacimientoField1122" layoutX="854.0" layoutY="616.0" prefHeight="26.0" prefWidth="162.0" />
+         <TextField fx:id="situacionRevistaField" layoutX="854.0" layoutY="616.0" prefHeight="26.0" prefWidth="162.0" />
          <Text layoutX="644.0" layoutY="631.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Situacion de revista" wrappingWidth="149.5999999999999">
             <font>
                <Font size="15.0" />
             </font>
          </Text>
-         <TextField fx:id="nacimientoField113" layoutX="854.0" layoutY="656.0" prefHeight="26.0" prefWidth="162.0" />
+         <TextField fx:id="codZonaField" layoutX="854.0" layoutY="656.0" prefHeight="26.0" prefWidth="162.0" />
          <Text layoutX="644.0" layoutY="675.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Codigo de zona" wrappingWidth="149.5999999999999">
             <font>
                <Font size="15.0" />
             </font>
          </Text>
-         <TextField fx:id="nacimientoField1131" layoutX="854.0" layoutY="697.0" prefHeight="26.0" prefWidth="162.0" />
+         <TextField fx:id="modalidadTrabajoField" layoutX="854.0" layoutY="697.0" prefHeight="26.0" prefWidth="162.0" />
          <Text layoutX="644.0" layoutY="717.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modalidad de trabajo" wrappingWidth="149.5999999999999">
             <font>
                <Font size="15.0" />
             </font>
          </Text>
-         <TextField fx:id="nacimientoField12" layoutX="854.0" layoutY="362.0" prefHeight="26.0" prefWidth="162.0" />
+         <TextField fx:id="puestoField" layoutX="854.0" layoutY="362.0" prefHeight="26.0" prefWidth="162.0" />
          <Line endX="-100.5" endY="737.5" layoutX="701.0" layoutY="9.0" startX="-99.99993896484375" startY="-8.999994277954102" />
          <Line endX="353.39990234375" layoutX="701.0" layoutY="334.0" startX="-100.0" />
          <Line endX="353.39990234375" layoutX="701.0" layoutY="747.0" startX="-701.0" />
