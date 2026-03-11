@@ -2,9 +2,12 @@ package com.salsge.demo.JavaFX;
 
 import com.salsge.demo.Employees.Employee;
 import com.salsge.demo.Employees.EmployeeService;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -23,10 +26,13 @@ public class NovedadesController implements Initializable {
     @FXML private TextField novLegajoField;
     @FXML private TextField novColaboradorField;
     @FXML private TextField novCodigoField;
-    @FXML private TextField novConceptoField;
+    @FXML private ChoiceBox<String> novConceptoField;
     @FXML private TextField novHField;
     @FXML private TextField novDField;
     @FXML private TextField novImporteField;
+
+    // Traer conceptos de la base de datos
+    private ObservableList<String> conceptoOptions = FXCollections.observableArrayList("No especificar");
 
     public NovedadesController() {
     }
@@ -44,7 +50,7 @@ public class NovedadesController implements Initializable {
         novLegajoField.setText("");
         novColaboradorField.setText("");
         novCodigoField.setText("");
-        novConceptoField.setText("");
+        novConceptoField.setValue("");
         novHField.setText("");
         novDField.setText("");
         novImporteField.setText("");
@@ -52,6 +58,7 @@ public class NovedadesController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        novConceptoField.setItems(conceptoOptions);
         novLegajoField.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent ke) {
@@ -61,4 +68,11 @@ public class NovedadesController implements Initializable {
             }
         });
     }
+
+    // CRUD
+    public void createNovedades() {
+
+    }
+
+
 }
