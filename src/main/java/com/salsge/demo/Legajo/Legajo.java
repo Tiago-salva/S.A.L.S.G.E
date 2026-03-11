@@ -1,6 +1,7 @@
 package com.salsge.demo.Legajo;
 
 import com.salsge.demo.Employees.Employee;
+import com.salsge.demo.Novedades.Novedades;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -21,6 +22,12 @@ public class Legajo {
     @JoinColumn(name = "employee_id", nullable = false, unique = true)
 
     private Employee employee;
+
+
+    @OneToMany
+    @JoinColumn(name = "novedades_id", nullable = false, unique = true)
+    private Novedades novedades;
+
 
     @Column(unique = true, nullable = false)
     @NotBlank
@@ -162,15 +169,17 @@ public class Legajo {
     // Constructores
     public Legajo() {};
 
-    public Legajo(Long id, Employee employee, String numeroDeLegajo, Integer antiguedadReconocida) {
+    public Legajo(Long id, Employee employee, String numeroDeLegajo, Novedades novedades) {
         this.id = id;
         this.employee = employee;
         this.numeroDeLegajo = numeroDeLegajo;
+        this.novedades = novedades;
     }
 
-    public Legajo(Employee employee, String numeroDeLegajo, Integer antiguedadReconocida) {
+    public Legajo(Employee employee, String numeroDeLegajo, Novedades novedades) {
         this.employee = employee;
         this.numeroDeLegajo = numeroDeLegajo;
+        this.novedades = novedades;
     }
 
     // Getters and setters
@@ -197,6 +206,14 @@ public class Legajo {
 
     public void setNumeroDeLegajo(String numeroDeLegajo) {
         this.numeroDeLegajo = numeroDeLegajo;
+    }
+
+    public Novedades getNovedades() {
+        return novedades;
+    }
+
+    public void setNovedades(Novedades novedades) {
+        this.novedades = novedades;
     }
 
     public String getLastNames() {
