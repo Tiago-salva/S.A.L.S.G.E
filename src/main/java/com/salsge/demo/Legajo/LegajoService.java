@@ -29,6 +29,10 @@ public class LegajoService {
         return legajoRepository.findById(id);
     }
 
+    public Optional<Legajo> getLegajoByNumber(Integer legajoNumber) {
+        return legajoRepository.findByNumeroDeLegajoContainingIgnoreCase(legajoNumber);
+    }
+
     @Transactional
     public void createLegajo(Legajo legajo) {
 
