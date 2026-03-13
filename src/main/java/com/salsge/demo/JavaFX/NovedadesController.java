@@ -2,6 +2,8 @@ package com.salsge.demo.JavaFX;
 
 import com.salsge.demo.Employees.Employee;
 import com.salsge.demo.Employees.EmployeeService;
+import com.salsge.demo.Novedades.Novedades;
+import com.salsge.demo.Novedades.NovedadesService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -23,9 +25,11 @@ public class NovedadesController implements Initializable {
     @Autowired
     EmployeeService employeeService;
 
+    @Autowired
+    NovedadesService novedadesService;
+
     @FXML private TextField novLegajoField;
     @FXML private TextField novColaboradorField;
-    @FXML private TextField novCodigoField;
     @FXML private ChoiceBox<String> novConceptoField;
     @FXML private TextField novHField;
     @FXML private TextField novDField;
@@ -49,7 +53,6 @@ public class NovedadesController implements Initializable {
     public void clearNovedades() {
         novLegajoField.setText("");
         novColaboradorField.setText("");
-        novCodigoField.setText("");
         novConceptoField.setValue("");
         novHField.setText("");
         novDField.setText("");
@@ -71,6 +74,24 @@ public class NovedadesController implements Initializable {
 
     // CRUD
     public void createNovedades() {
+
+        Novedades novedades = new Novedades();
+
+        String legajoNumber = novLegajoField.getText();
+        Integer colaborador = Integer.valueOf(novColaboradorField.getText());
+        String concepto = novConceptoField.getValue();
+        Integer horas = Integer.valueOf(novHField.getText());
+        Integer dias = Integer.valueOf(novDField.getText());
+        Integer importe = Integer.valueOf(novImporteField.getText());
+
+        novedades.setLegajoNumber(Integer.valueOf(legajoNumber));
+        novedades.setColaborador(String.valueOf(colaborador));
+        novedades.setConcepto(concepto);
+        novedades.setHoras(horas);
+        novedades.setDias(dias);
+        novedades.setImporte(importe);
+
+        novedadesService.createNovedades(novedades);
 
     }
 
