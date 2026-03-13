@@ -23,7 +23,7 @@ public class Legajo {
 
     private Employee employee;
 
-
+    // En un futuro deberia ser un array
     @OneToMany
     @JoinColumn(name = "novedades_id", nullable = false, unique = true)
     private Novedades novedades;
@@ -169,17 +169,15 @@ public class Legajo {
     // Constructores
     public Legajo() {};
 
-    public Legajo(Long id, Employee employee, String numeroDeLegajo, Novedades novedades) {
+    public Legajo(Long id, Employee employee, String numeroDeLegajo) {
         this.id = id;
         this.employee = employee;
         this.numeroDeLegajo = numeroDeLegajo;
-        this.novedades = novedades;
     }
 
-    public Legajo(Employee employee, String numeroDeLegajo, Novedades novedades) {
+    public Legajo(Employee employee, String numeroDeLegajo) {
         this.employee = employee;
         this.numeroDeLegajo = numeroDeLegajo;
-        this.novedades = novedades;
     }
 
     // Getters and setters
