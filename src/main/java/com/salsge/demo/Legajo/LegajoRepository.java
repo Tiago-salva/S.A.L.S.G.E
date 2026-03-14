@@ -6,6 +6,6 @@ import java.util.Optional;
 
 public interface LegajoRepository extends JpaRepository<Legajo, Long> {
 
-    Optional<Legajo> findByNumeroDeLegajoContainingIgnoreCase(Integer legajoNumber);
+    Optional<Legajo> findByNumeroDeLegajoContainingIgnoreCase(String legajoNumber);
 
 }

@@ -29,7 +29,7 @@ public class LegajoService {
         return legajoRepository.findById(id);
     }
 
-    public Optional<Legajo> getLegajoByNumber(Integer legajoNumber) {
+    public Optional<Legajo> getLegajoByNumber(String legajoNumber) {
         return legajoRepository.findByNumeroDeLegajoContainingIgnoreCase(legajoNumber);
     }
 
