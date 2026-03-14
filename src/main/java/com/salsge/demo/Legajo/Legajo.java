@@ -10,6 +10,7 @@ import jakarta.validation.constraints.PositiveOrZero;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity(name = "legajo")
 public class Legajo {
@@ -20,14 +21,10 @@ public class Legajo {
 
     @OneToOne(optional = false)
     @JoinColumn(name = "employee_id", nullable = false, unique = true)
-
     private Employee employee;
 
-    // En un futuro deberia ser un array
-    @OneToMany
-    @JoinColumn(name = "novedades_id", nullable = false, unique = true)
-    private Novedades novedades;
-
+    @OneToMany(mappedBy = "legajo", cascade = CascadeType.ALL)
+    private List<Novedades> novedades;
 
     @Column(unique = true, nullable = false)
     @NotBlank
@@ -114,9 +111,8 @@ public class Legajo {
     @Column(nullable = false)
     private String banco;
 
-    @NotNull
     @Positive
-    @Column(nullable = false)
+    @Column(nullable = true)
     private BigDecimal sueldo;
 
     @NotBlank
@@ -206,11 +202,11 @@ public class Legajo {
         this.numeroDeLegajo = numeroDeLegajo;
     }
 
-    public Novedades getNovedades() {
+    public List<Novedades> getNovedades() {
         return novedades;
     }
 
-    public void setNovedades(Novedades novedades) {
+    public void setNovedades(List<Novedades> novedades) {
         this.novedades = novedades;
     }
 
