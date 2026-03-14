@@ -2,6 +2,7 @@ package com.salsge.demo.JavaFX;
 
 import com.salsge.demo.Employees.Employee;
 import com.salsge.demo.Employees.EmployeeService;
+import com.salsge.demo.Legajo.LegajoService;
 import com.salsge.demo.Novedades.Novedades;
 import com.salsge.demo.Novedades.NovedadesService;
 import javafx.collections.FXCollections;
@@ -26,6 +27,9 @@ public class NovedadesController implements Initializable {
     EmployeeService employeeService;
 
     @Autowired
+    LegajoService legajoService;
+
+    @Autowired
     NovedadesService novedadesService;
 
     @FXML private TextField novLegajoField;
@@ -36,7 +40,7 @@ public class NovedadesController implements Initializable {
     @FXML private TextField novImporteField;
 
     // Traer conceptos de la base de datos
-    private ObservableList<String> conceptoOptions = FXCollections.observableArrayList("No especificar");
+    private ObservableList<String> conceptoOptions = FXCollections.observableArrayList("Ley 19.032 I.N.S.S.J.P. (SAC)", "OBRA SOCIAL", "Ley 22.269 O.S. (SAC)");
 
     public NovedadesController() {
     }
@@ -78,20 +82,15 @@ public class NovedadesController implements Initializable {
         Novedades novedades = new Novedades();
 
         String legajoNumber = novLegajoField.getText();
-        Integer colaborador = Integer.valueOf(novColaboradorField.getText());
+        String colaborador = novColaboradorField.getText();
         String concepto = novConceptoField.getValue();
         Integer horas = Integer.valueOf(novHField.getText());
         Integer dias = Integer.valueOf(novDField.getText());
         Integer importe = Integer.valueOf(novImporteField.getText());
 
-        novedades.setLegajoNumber(Integer.valueOf(legajoNumber));
-        novedades.setColaborador(String.valueOf(colaborador));
-        novedades.setConcepto(concepto);
-        novedades.setHoras(horas);
-        novedades.setDias(dias);
-        novedades.setImporte(importe);
+        novedadesService.createNovedades(legajoNumber, colaborador, concepto, horas, dias, importe);
 
-        novedadesService.createNovedades(novedades);
+        clearNovedades();
 
     }
 
