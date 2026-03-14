@@ -1,48 +1,47 @@
 package com.salsge.demo.Novedades;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.salsge.demo.Legajo.Legajo;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 
+@Entity(name = "novedades")
 public class Novedades {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
-    @Positive
-    @Column(nullable = false)
-    Integer legajoNumber;
-
-    @NotBlank
-    @Column(nullable = false)
-    String colaborador;
+    @ManyToOne
+    @JoinColumn(name = "legajo_id", nullable = false)
+    private Legajo legajo;
 
     @NotBlank
     @Column(nullable = false)
-    String concepto;
+    private String colaborador;
+
+    @NotBlank
+    @Column(nullable = false)
+    private String concepto;
 
     @Positive
     @Column(nullable = false)
-    Integer dias;
+    private Integer dias;
 
     @Positive
     @Column(nullable = false)
-    Integer horas;
+    private Integer horas;
 
     @Positive
     @Column(nullable = false)
-    Integer importe;
+    private Integer importe;
 
     // Constructores
     public Novedades() {}
 
-    public Novedades(Long id, Integer legajoNumber, String colaborador, String concepto, Integer dias, Integer horas, Integer importe) {
+    public Novedades(Long id, Legajo legajo, String colaborador, String concepto, Integer dias, Integer horas, Integer importe) {
         this.id = id;
-        this.legajoNumber = legajoNumber;
+        this.legajo = legajo;
         this.colaborador = colaborador;
         this.concepto = concepto;
         this.dias = dias;
@@ -59,12 +58,12 @@ public class Novedades {
         this.id = id;
     }
 
-    public @Positive Integer getLegajoNumber() {
-        return legajoNumber;
+    public Legajo getLegajo() {
+        return legajo;
     }
 
-    public void setLegajoNumber(@Positive Integer legajoNumber) {
-        this.legajoNumber = legajoNumber;
+    public void setLegajo(Legajo legajo) {
+        this.legajo = legajo;
     }
 
     public @NotBlank String getColaborador() {
