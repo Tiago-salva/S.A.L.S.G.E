@@ -5,20 +5,21 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.salsge.demo.JavaFX.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="386.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.salsge.demo.JavaFX.MainController">
    <children>
-      <Text layoutX="218.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="S.A.L.S.G.E" wrappingWidth="164.0">
+      <Text layoutX="227.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="S.A.L.S.G.E" wrappingWidth="164.0">
          <font>
             <Font size="34.0" />
          </font>
       </Text>
-      <Text layoutX="170.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sistema Automatico de Liquidacion de Sueldos y Gestion de Empleados" textAlignment="CENTER" wrappingWidth="259.2000732421875">
+      <Text layoutX="179.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sistema Automatico de Liquidacion de Sueldos y Gestion de Empleados" textAlignment="CENTER" wrappingWidth="259.2000732421875">
          <font>
             <Font size="14.0" />
          </font>
       </Text>
-      <Button fx:id="legajoBtn" layoutX="245.0" layoutY="165.0" mnemonicParsing="false" onAction="#loadEmployeesView" text="Gestionar legajos" />
-      <Button fx:id="liquidacionBtn" layoutX="240.0" layoutY="227.0" mnemonicParsing="false" onAction="#loadPayrollView" text="Generar liquidacion" />
-      <Button fx:id="novedadesBtn" layoutX="240.0" layoutY="287.0" mnemonicParsing="false" onAction="#loadNovedadesView" text="Agregar novedades" />
+      <Button fx:id="legajoBtn" layoutX="249.0" layoutY="152.0" mnemonicParsing="false" onAction="#loadEmployeesView" prefHeight="25.0" prefWidth="120.0" text="Gestionar legajos" />
+      <Button fx:id="liquidacionBtn" layoutX="249.0" layoutY="206.0" mnemonicParsing="false" onAction="#loadPayrollView" text="Generar liquidacion" />
+      <Button fx:id="novedadesBtn" layoutX="249.0" layoutY="257.0" mnemonicParsing="false" onAction="#loadNovedadesView" prefHeight="25.0" prefWidth="120.0" text="Agregar novedad" />
+      <Button fx:id="conceptosBtn" layoutX="249.0" layoutY="309.0" mnemonicParsing="false" onAction="#loadConceptosView" prefHeight="25.0" prefWidth="120.0" text="Agregar Concepto" />
    </children>
 </AnchorPane>
