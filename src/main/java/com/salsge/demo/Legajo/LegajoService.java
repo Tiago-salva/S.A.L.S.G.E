@@ -33,6 +33,10 @@ public class LegajoService {
         return legajoRepository.findByNumeroDeLegajoContainingIgnoreCase(legajoNumber);
     }
 
+    public List<Legajo> getAllLegajosByNumber(List<String> legajoNumbers) {
+        return legajoRepository.findByNumeroDeLegajoIn(legajoNumbers);
+    }
+
     @Transactional
     public void createLegajo(Legajo legajo) {
 
