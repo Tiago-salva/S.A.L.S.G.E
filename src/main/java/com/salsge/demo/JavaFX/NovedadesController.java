@@ -1,10 +1,11 @@
 package com.salsge.demo.JavaFX;
 
-import com.salsge.demo.Employees.EmployeeService;
+import com.salsge.demo.Conceptos.Concepto;
+import com.salsge.demo.Conceptos.ConceptoService;
 import com.salsge.demo.Legajo.Legajo;
 import com.salsge.demo.Legajo.LegajoService;
-import com.salsge.demo.Novedades.Novedades;
-import com.salsge.demo.Novedades.NovedadesService;
+import com.salsge.demo.Novedades.Novedad;
+import com.salsge.demo.Novedades.NovedadService;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,33 +27,34 @@ import java.util.stream.Collectors;
 public class NovedadesController implements Initializable {
 
     @Autowired
-    EmployeeService employeeService;
-
-    @Autowired
     LegajoService legajoService;
 
     @Autowired
-    NovedadesService novedadesService;
+    ConceptoService conceptoService;
 
-    @FXML private TableView<Novedades> tableNovedades;
+    @Autowired
+    NovedadService novedadService;
 
-    @FXML private TableColumn<Novedades, String> legajoCol;
-    @FXML private TableColumn<Novedades, String> colaboradorCol;
-    @FXML private TableColumn<Novedades, String> conceptoCol;
-    @FXML private TableColumn<Novedades, Integer> horasCol;
-    @FXML private TableColumn<Novedades, Integer> diasCol;
-    @FXML private TableColumn<Novedades, Integer> importeCol;
+    @FXML private TableView<Novedad> tableNovedades;
 
-    ObservableList<Novedades> novedadesList = FXCollections.observableArrayList();
+    @FXML private TableColumn<Novedad, String> legajoCol;
+    @FXML private TableColumn<Novedad, String> colaboradorCol;
+    @FXML private TableColumn<Novedad, Concepto> conceptoCol;
+    @FXML private TableColumn<Novedad, Integer> horasCol;
+    @FXML private TableColumn<Novedad, Integer> diasCol;
+    @FXML private TableColumn<Novedad, Integer> importeCol;
 
-    // Traer conceptos de la base de datos
-    private ObservableList<String> conceptoOptions = FXCollections.observableArrayList("Ley 19.032 I.N.S.S.J.P. (SAC)", "OBRA SOCIAL", "Ley 22.269 O.S. (SAC)");
+    ObservableList<Novedad> novedadesList = FXCollections.observableArrayList();
+
+    private ObservableList<Concepto> conceptoOptions;
 
     public NovedadesController() {
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        conceptoOptions =  FXCollections.observableArrayList(conceptoService.getAllConceptos());
+
         tableNovedades.setEditable(true);
         tableNovedades.setItems(novedadesList);
 
@@ -115,7 +117,7 @@ public class NovedadesController implements Initializable {
         for(String row : rows) {
             String[] columns = row.split("\\t");
 
-            Novedades novedad = new Novedades();
+            Novedad novedad = new Novedad();
 
             Legajo legajo = legajoMap.get(columns[0]);
 

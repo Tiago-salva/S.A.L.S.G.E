@@ -1,7 +1,7 @@
 package com.salsge.demo.Legajo;
 
 import com.salsge.demo.Employees.Employee;
-import com.salsge.demo.Novedades.Novedades;
+import com.salsge.demo.Novedades.Novedad;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -24,7 +24,7 @@ public class Legajo {
     private Employee employee;
 
     @OneToMany(mappedBy = "legajo", cascade = CascadeType.ALL)
-    private List<Novedades> novedades;
+    private List<Novedad> novedades;
 
     @Column(unique = true, nullable = false)
     @NotBlank
@@ -202,11 +202,11 @@ public class Legajo {
         this.numeroDeLegajo = numeroDeLegajo;
     }
 
-    public List<Novedades> getNovedades() {
+    public List<Novedad> getNovedades() {
         return novedades;
     }
 
-    public void setNovedades(List<Novedades> novedades) {
+    public void setNovedades(List<Novedad> novedades) {
         this.novedades = novedades;
     }
 

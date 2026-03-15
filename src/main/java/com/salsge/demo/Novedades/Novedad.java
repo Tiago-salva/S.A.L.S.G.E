@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 
 @Entity(name = "novedades")
-public class Novedades {
+public class Novedad {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,9 +37,9 @@ public class Novedades {
     private Integer importe;
 
     // Constructores
-    public Novedades() {}
+    public Novedad() {}
 
-    public Novedades(Long id, Legajo legajo, String colaborador, String concepto, Integer dias, Integer horas, Integer importe) {
+    public Novedad(Long id, Legajo legajo, String colaborador, String concepto, Integer dias, Integer horas, Integer importe) {
         this.id = id;
         this.legajo = legajo;
         this.colaborador = colaborador;
