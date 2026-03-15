@@ -2,23 +2,33 @@ package com.salsge.demo.JavaFX;
 
 import com.salsge.demo.Employees.Employee;
 import com.salsge.demo.Employees.EmployeeService;
+import com.salsge.demo.Legajo.Legajo;
 import com.salsge.demo.Legajo.LegajoService;
 import com.salsge.demo.Novedades.Novedades;
 import com.salsge.demo.Novedades.NovedadesService;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.ComboBoxTableCell;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.Clipboard;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.util.converter.IntegerStringConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.net.URL;
-import java.util.ResourceBundle;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Component
 public class NovedadesController implements Initializable {
@@ -32,12 +42,24 @@ public class NovedadesController implements Initializable {
     @Autowired
     NovedadesService novedadesService;
 
-    @FXML private TextField novLegajoField;
-    @FXML private TextField novColaboradorField;
-    @FXML private ChoiceBox<String> novConceptoField;
-    @FXML private TextField novHField;
-    @FXML private TextField novDField;
-    @FXML private TextField novImporteField;
+//    @FXML private TextField novLegajoField;
+//    @FXML private TextField novColaboradorField;
+//    @FXML private ChoiceBox<String> novConceptoField;
+//    @FXML private TextField novHField;
+//    @FXML private TextField novDField;
+//    @FXML private TextField novImporteField;
+
+
+    @FXML private TableView<Novedades> tableNovedades;
+
+    @FXML private TableColumn<Novedades, String> legajoCol;
+    @FXML private TableColumn<Novedades, String> colaboradorCol;
+    @FXML private TableColumn<Novedades, String> conceptoCol;
+    @FXML private TableColumn<Novedades, Integer> horasCol;
+    @FXML private TableColumn<Novedades, Integer> diasCol;
+    @FXML private TableColumn<Novedades, Integer> importeCol;
+
+    ObservableList<Novedades> novedadesList = FXCollections.observableArrayList();
 
     // Traer conceptos de la base de datos
     private ObservableList<String> conceptoOptions = FXCollections.observableArrayList("Ley 19.032 I.N.S.S.J.P. (SAC)", "OBRA SOCIAL", "Ley 22.269 O.S. (SAC)");
@@ -45,53 +67,88 @@ public class NovedadesController implements Initializable {
     public NovedadesController() {
     }
 
-    public void renderEmployeeByLegajo() {
-
-        String legajoNumber = novLegajoField.getText();
-
-        Employee employee = employeeService.getEmployeeByLegajo(legajoNumber).orElseThrow(() -> new RuntimeException("No existe empleado con ese legajo"));
-
-        novColaboradorField.setText(employee.getFullName());
-    }
-
-    public void clearNovedades() {
-        novLegajoField.setText("");
-        novColaboradorField.setText("");
-        novConceptoField.setValue("");
-        novHField.setText("");
-        novDField.setText("");
-        novImporteField.setText("");
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        novConceptoField.setItems(conceptoOptions);
-        novLegajoField.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent ke) {
-                if (ke.getCode().equals(KeyCode.ENTER)) {
-                    renderEmployeeByLegajo();
-                }
+        tableNovedades.setEditable(true);
+        tableNovedades.setItems(novedadesList);
+
+        tableNovedades.setOnKeyPressed(event -> {
+
+            if (event.isControlDown() && event.getCode() == KeyCode.V) {
+                handlePaste();
             }
+
         });
+
+        legajoCol.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getLegajo().getNumeroDeLegajo())
+        );
+
+        colaboradorCol.setCellValueFactory(cellData ->
+                new SimpleStringProperty(
+                        cellData.getValue().getLegajo().getEmployee().getFullName()
+                )
+        );
+
+        conceptoCol.setCellValueFactory(new PropertyValueFactory<>("concepto"));
+        horasCol.setCellValueFactory(new PropertyValueFactory<>("horas"));
+        diasCol.setCellValueFactory(new PropertyValueFactory<>("dias"));
+        importeCol.setCellValueFactory(new PropertyValueFactory<>("importe"));
+
+//        legajoCol.setCellFactory(TextFieldTableCell.forTableColumn());
+//        colaboradorCol.setCellFactory(TextFieldTableCell.forTableColumn());
+//        conceptoCol.setCellFactory(ComboBoxTableCell.forTableColumn(conceptoOptions));
+//        horasCol.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+//        diasCol.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+//        importeCol.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
     }
 
-    // CRUD
-    public void createNovedades() {
+    private void handlePaste() {
 
-        Novedades novedades = new Novedades();
+        Clipboard clipboard = Clipboard.getSystemClipboard();
 
-        String legajoNumber = novLegajoField.getText();
-        String colaborador = novColaboradorField.getText();
-        String concepto = novConceptoField.getValue();
-        Integer horas = Integer.valueOf(novHField.getText());
-        Integer dias = Integer.valueOf(novDField.getText());
-        Integer importe = Integer.valueOf(novImporteField.getText());
+        if (!clipboard.hasString()) return;
 
-        novedadesService.createNovedades(legajoNumber, colaborador, concepto, horas, dias, importe);
+        String text = clipboard.getString();
 
-        clearNovedades();
+        String[] rows = text.split("\\R");
 
+        List<String> legajoNumbers = new ArrayList<>();
+
+        for(String row : rows) {
+            String[] columns = row.split("\\t");
+
+            if(columns.length > 0) {
+                legajoNumbers.add(columns[0].trim());
+            }
+        }
+
+        List<Legajo> legajos = legajoService.getAllLegajosByNumber(legajoNumbers);
+
+        Map<String, Legajo> legajoMap = legajos.stream()
+                .collect(Collectors.toMap(Legajo::getNumeroDeLegajo, l -> l));
+
+        for(String row : rows) {
+            String[] columns = row.split("\\t");
+
+            Novedades novedad = new Novedades();
+
+            Legajo legajo = legajoMap.get(columns[0]);
+
+            if(legajo == null) {
+                throw new RuntimeException("Legajo no encontrado " + columns[0]);
+            }
+
+            novedad.setLegajo(legajo);
+
+            if (columns.length > 1) novedad.setConcepto(columns[1]);
+            if (columns.length > 2) novedad.setHoras(Integer.parseInt(columns[2]));
+            if (columns.length > 3) novedad.setDias(Integer.parseInt(columns[3]));
+            if (columns.length > 4) novedad.setImporte(Integer.parseInt(columns[4]));
+
+            novedadesList.add(novedad);
+
+        }
     }
 
 
