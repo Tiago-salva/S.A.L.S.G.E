@@ -1,13 +1,10 @@
 package com.salsge.demo.Novedades;
 
 import com.salsge.demo.Legajo.Legajo;
-import com.salsge.demo.Legajo.LegajoRepository;
 import com.salsge.demo.Legajo.LegajoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
-
-import java.util.List;
 
 @Validated
 @Service

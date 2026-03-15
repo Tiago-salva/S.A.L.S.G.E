@@ -1,6 +1,5 @@
 package com.salsge.demo;
 
-import com.salsge.demo.JavaFX.MainController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,8 +8,6 @@ import javafx.stage.Stage;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-
-import java.util.Scanner;
 
 @SpringBootApplication
 public class SalsgeDemoApplication extends Application {

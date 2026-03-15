@@ -4,7 +4,6 @@ import com.salsge.demo.Employees.Employee;
 import com.salsge.demo.Employees.EmployeeService;
 import com.salsge.demo.Legajo.LegajoService;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,7 +17,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.util.List;
 
 @Component
 public class EmployeesController {

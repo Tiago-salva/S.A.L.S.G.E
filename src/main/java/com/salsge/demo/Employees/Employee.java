@@ -3,8 +3,6 @@ package com.salsge.demo.Employees;
 import com.salsge.demo.Legajo.Legajo;
 import jakarta.persistence.*;
 
-import java.sql.Date;
-
 @Entity(name = "employee")
 public class Employee {
 
