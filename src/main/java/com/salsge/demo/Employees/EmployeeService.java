@@ -34,9 +34,7 @@ import java.util.Optional;
             return employeeRepository.findByLegajoNumeroDeLegajoIgnoreCase(legajoNumber);
         }
 
-        public Employee createEmployee(String employeeFullName) {
-
-            Employee employee = new Employee(employeeFullName);
+        public Employee createEmployee(Employee employee) {
             return employeeRepository.save(employee);
         }
 
