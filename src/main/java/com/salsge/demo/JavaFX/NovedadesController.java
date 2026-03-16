@@ -92,6 +92,10 @@ public class NovedadesController implements Initializable {
         importeCol.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
     }
 
+    public void clearNovedades() {
+        novedadesList.clear();
+    }
+
     private void handlePaste() {
 
         Map<String, Concepto> conceptoMap = conceptoService.getAllConceptos()
@@ -170,8 +174,10 @@ public class NovedadesController implements Initializable {
             novedad.setImporte(novedadLoop.getImporte());
 
             novedadService.createNovedad(novedad);
-
         }
+
+        clearNovedades();
+
     }
 
 }
