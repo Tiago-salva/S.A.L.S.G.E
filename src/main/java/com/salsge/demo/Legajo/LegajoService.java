@@ -2,6 +2,7 @@ package com.salsge.demo.Legajo;
 
 import com.salsge.demo.Employees.Employee;
 import com.salsge.demo.Employees.EmployeeRepository;
+import com.salsge.demo.Employees.EmployeeService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
@@ -14,11 +15,11 @@ import java.util.Optional;
 public class LegajoService {
 
     LegajoRepository legajoRepository;
-    EmployeeRepository employeeRepository;
+    EmployeeService employeeService;
 
-    public LegajoService(LegajoRepository legajoRepository, EmployeeRepository employeeRepository) {
+    public LegajoService(LegajoRepository legajoRepository, EmployeeService employeeService) {
         this.legajoRepository = legajoRepository;
-        this.employeeRepository = employeeRepository;
+        this.employeeService = employeeService;
     }
 
     public List<Legajo> getAllLegajos() {
@@ -45,11 +46,10 @@ public class LegajoService {
             Employee employee = new Employee(employeeFullName);
 
             legajo.setEmployee(employee);
-            employee.assignLegajo(legajo);
+            employee.assignLegajo(legajo); // This should set both sides
 
-            employeeRepository.save(employee);
+            employeeService.createEmployee(employee);
 
-            // legajoRepository.save(legajoData);
     }
 
     public void editLegajo(Long legajoId, Legajo legajoData) {
