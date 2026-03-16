@@ -68,4 +68,9 @@ public class Concepto {
     public void setTipoDeConcepto(String tipoDeConcepto) {
         this.tipoDeConcepto = tipoDeConcepto;
     }
+
+    @Override
+    public String toString() {
+        return this.conceptoName;
+    }
 }
