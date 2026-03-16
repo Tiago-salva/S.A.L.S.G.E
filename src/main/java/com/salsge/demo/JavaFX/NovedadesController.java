@@ -13,9 +13,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.KeyCode;
+import javafx.util.converter.IntegerStringConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -81,15 +84,22 @@ public class NovedadesController implements Initializable {
         diasCol.setCellValueFactory(new PropertyValueFactory<>("dias"));
         importeCol.setCellValueFactory(new PropertyValueFactory<>("importe"));
 
-//        legajoCol.setCellFactory(TextFieldTableCell.forTableColumn());
-//        colaboradorCol.setCellFactory(TextFieldTableCell.forTableColumn());
-//        conceptoCol.setCellFactory(ComboBoxTableCell.forTableColumn(conceptoOptions));
-//        horasCol.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
-//        diasCol.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
-//        importeCol.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+        legajoCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        colaboradorCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        conceptoCol.setCellFactory(ComboBoxTableCell.forTableColumn(conceptoOptions));
+        horasCol.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+        diasCol.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+        importeCol.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
     }
 
     private void handlePaste() {
+
+        Map<String, Concepto> conceptoMap = conceptoService.getAllConceptos()
+                .stream()
+                .collect(Collectors.toMap(
+                        c -> c.getConceptoName().toLowerCase(),
+                        c -> c
+                ));
 
         Clipboard clipboard = Clipboard.getSystemClipboard();
 
@@ -102,7 +112,7 @@ public class NovedadesController implements Initializable {
         List<String> legajoNumbers = new ArrayList<>();
 
         for(String row : rows) {
-            String[] columns = row.split("\\t");
+            String[] columns = row.trim().split("\t");
 
             if(columns.length > 0) {
                 legajoNumbers.add(columns[0].trim());
@@ -115,7 +125,7 @@ public class NovedadesController implements Initializable {
                 .collect(Collectors.toMap(Legajo::getNumeroDeLegajo, l -> l));
 
         for(String row : rows) {
-            String[] columns = row.split("\\t");
+            String[] columns = row.trim().split("\t");
 
             Novedad novedad = new Novedad();
 
@@ -127,7 +137,16 @@ public class NovedadesController implements Initializable {
 
             novedad.setLegajo(legajo);
 
-            if (columns.length > 1) novedad.setConcepto(columns[1]);
+            novedad.setColaborador(legajo.getEmployee().getFullName());
+
+            Concepto concepto = conceptoMap.get(columns[1].toLowerCase());
+
+            if(concepto == null) {
+                throw new RuntimeException("Concepto no encontrado: " + columns[1]);
+            } else {
+                novedad.setConcepto(concepto);
+            }
+
             if (columns.length > 2) novedad.setHoras(Integer.parseInt(columns[2]));
             if (columns.length > 3) novedad.setDias(Integer.parseInt(columns[3]));
             if (columns.length > 4) novedad.setImporte(Integer.parseInt(columns[4]));
@@ -137,5 +156,22 @@ public class NovedadesController implements Initializable {
         }
     }
 
+    // CRUD
+    public void createNovedad() {
+        for (Novedad novedadLoop : novedadesList) {
+
+            Novedad novedad = new Novedad();
+
+            novedad.setLegajo(novedadLoop.getLegajo());
+            novedad.setColaborador(novedadLoop.getColaborador());
+            novedad.setConcepto(novedadLoop.getConcepto());
+            novedad.setHoras(novedadLoop.getHoras());
+            novedad.setDias(novedadLoop.getDias());
+            novedad.setImporte(novedadLoop.getImporte());
+
+            novedadService.createNovedad(novedad);
+
+        }
+    }
 
 }
