@@ -1,9 +1,11 @@
 package com.salsge.demo.Novedades;
 
+import com.salsge.demo.Conceptos.Concepto;
 import com.salsge.demo.Legajo.Legajo;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 
 @Entity(name = "novedades")
 public class Novedad {
@@ -18,28 +20,30 @@ public class Novedad {
 
     @NotBlank
     @Column(nullable = false)
+    // Se puede borrar en un futuro
+    // Ya lo obtengo a partir de legajo
     private String colaborador;
 
-    @NotBlank
-    @Column(nullable = false)
-    private String concepto;
+    @ManyToOne
+    @JoinColumn(name = "concepto_id", nullable = false)
+    private Concepto concepto;
 
-    @Positive
+    @PositiveOrZero
     @Column(nullable = false)
     private Integer dias;
 
-    @Positive
+    @PositiveOrZero
     @Column(nullable = false)
     private Integer horas;
 
-    @Positive
+    @PositiveOrZero
     @Column(nullable = false)
     private Integer importe;
 
     // Constructores
     public Novedad() {}
 
-    public Novedad(Long id, Legajo legajo, String colaborador, String concepto, Integer dias, Integer horas, Integer importe) {
+    public Novedad(Long id, Legajo legajo, String colaborador, Concepto concepto, Integer dias, Integer horas, Integer importe) {
         this.id = id;
         this.legajo = legajo;
         this.colaborador = colaborador;
@@ -74,35 +78,35 @@ public class Novedad {
         this.colaborador = colaborador;
     }
 
-    public @NotBlank String getConcepto() {
+    public Concepto getConcepto() {
         return concepto;
     }
 
-    public void setConcepto(@NotBlank String concepto) {
+    public void setConcepto(Concepto concepto) {
         this.concepto = concepto;
     }
 
-    public @Positive Integer getDias() {
+    public @PositiveOrZero Integer getDias() {
         return dias;
     }
 
-    public void setDias(@Positive Integer dias) {
+    public void setDias(@PositiveOrZero Integer dias) {
         this.dias = dias;
     }
 
-    public @Positive Integer getHoras() {
+    public @PositiveOrZero Integer getHoras() {
         return horas;
     }
 
-    public void setHoras(@Positive Integer horas) {
+    public void setHoras(@PositiveOrZero Integer horas) {
         this.horas = horas;
     }
 
-    public @Positive Integer getImporte() {
+    public @PositiveOrZero Integer getImporte() {
         return importe;
     }
 
-    public void setImporte(@Positive Integer importe) {
+    public void setImporte(@PositiveOrZero Integer importe) {
         this.importe = importe;
     }
 }
