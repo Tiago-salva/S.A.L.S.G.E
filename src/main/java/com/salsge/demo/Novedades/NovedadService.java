@@ -1,5 +1,6 @@
 package com.salsge.demo.Novedades;
 
+import com.salsge.demo.Conceptos.Concepto;
 import com.salsge.demo.Legajo.Legajo;
 import com.salsge.demo.Legajo.LegajoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,20 +17,11 @@ public class NovedadService {
     @Autowired
     LegajoService legajoService;
 
-    public void createNovedad(String legajoNumber, String colaborador,
-                              String concepto, Integer horas,
-                              Integer dias, Integer importe) {
+    public void createNovedad(Novedad novedad) {
 
-        Legajo legajo = legajoService.getLegajoByNumber(legajoNumber).orElseThrow(() -> new RuntimeException("No existe ningun legajo con ese numero"));
-
-        Novedad novedad = new Novedad();
-
-        novedad.setLegajo(legajo);
-        novedad.setColaborador(colaborador);
-        novedad.setConcepto(concepto);
-        novedad.setHoras(horas);
-        novedad.setDias(dias);
-        novedad.setImporte(importe);
+        // Esta linea no tendria que servir para nada
+        // Ya que al pegar en la TableView checkea si existe algun legajo con el numero pegado
+        Legajo legajo = legajoService.getLegajoByNumber(novedad.getLegajo().getNumeroDeLegajo()).orElseThrow(() -> new RuntimeException("No existe ningun legajo con ese numero"));
 
         novedadRepository.save(novedad);
 
