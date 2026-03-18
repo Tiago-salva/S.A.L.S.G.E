@@ -53,7 +53,7 @@ public class LegajoService {
     }
 
     public void editLegajo(Long legajoId, Legajo legajoData) {
-        Legajo legajo = getLegajo(legajoId).orElseThrow(() -> new RuntimeException("Legajo not found"));
+        Legajo legajo = getLegajo(legajoId).orElseThrow(() -> new RuntimeException("El legajo no existe"));
 
         legajo.setNumeroDeLegajo(legajoData.getNumeroDeLegajo());
         legajo.setLastNames(legajoData.getLastNames());

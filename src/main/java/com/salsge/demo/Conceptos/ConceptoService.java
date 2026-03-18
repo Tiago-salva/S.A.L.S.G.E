@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
-import java.util.Optional;
 
 @Validated
 @Service
@@ -18,7 +17,17 @@ public class ConceptoService {
         return conceptoRepository.findAll();
     };
 
+    public boolean existsConcepto(String conceptoName, String codigoConcepto) {
+        return conceptoRepository.existsByConceptoNameOrCodigoConcepto(conceptoName, codigoConcepto);
+    }
+
     public void createConcepto(Concepto concepto) {
+
+        boolean conceptoExists = existsConcepto(concepto.getConceptoName(), concepto.getCodigoConcepto());
+
+        if(conceptoExists) {
+            throw new RuntimeException("Ya existe un concepto con ese nombre o codigo");
+        }
 
         conceptoRepository.save(concepto);
 

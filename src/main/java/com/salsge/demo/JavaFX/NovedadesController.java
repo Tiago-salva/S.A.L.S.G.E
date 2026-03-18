@@ -18,6 +18,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.KeyCode;
+import javafx.scene.text.Text;
 import javafx.util.converter.IntegerStringConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -46,6 +47,7 @@ public class NovedadesController implements Initializable {
     @FXML private TableColumn<Novedad, Integer> horasCol;
     @FXML private TableColumn<Novedad, Integer> diasCol;
     @FXML private TableColumn<Novedad, Integer> importeCol;
+    @FXML private Text notificationText;
 
     ObservableList<Novedad> novedadesList = FXCollections.observableArrayList();
 
@@ -125,6 +127,11 @@ public class NovedadesController implements Initializable {
 
         List<Legajo> legajos = legajoService.getAllLegajosByNumber(legajoNumbers);
 
+        if(legajos == null || legajos.isEmpty()) {
+            notificationText.setText("No existen legajos con esos numeros");
+            return;
+        }
+
         Map<String, Legajo> legajoMap = legajos.stream()
                 .collect(Collectors.toMap(Legajo::getNumeroDeLegajo, l -> l));
 
@@ -136,7 +143,8 @@ public class NovedadesController implements Initializable {
             Legajo legajo = legajoMap.get(columns[0]);
 
             if(legajo == null) {
-                throw new RuntimeException("Legajo no encontrado " + columns[0]);
+                notificationText.setText("El legajo con el numero '" + columns[0] + "' no fue encontrado");
+                return;
             }
 
             novedad.setLegajo(legajo);
@@ -146,7 +154,8 @@ public class NovedadesController implements Initializable {
             Concepto concepto = conceptoMap.get(columns[1].toLowerCase());
 
             if(concepto == null) {
-                throw new RuntimeException("Concepto no encontrado: " + columns[1]);
+                notificationText.setText("El concepto con el nombre '" + columns[1] + "' no fue encontrado");
+                return;
             } else {
                 novedad.setConcepto(concepto);
             }

@@ -5,6 +5,7 @@ import com.salsge.demo.Conceptos.ConceptoService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +19,7 @@ public class ConceptoController {
     @FXML private TextField conceptoCodigoField;
     @FXML private TextField conceptoTipoField;
     @FXML private Button conceptoButton;
+    @FXML private Text notificationText;
 
     @FXML
     private void createConcepto() {
@@ -32,7 +34,12 @@ public class ConceptoController {
         concepto.setCodigoConcepto(conceptoCodigo);
         concepto.setTipoDeConcepto(conceptoTipo);
 
-        conceptoService.createConcepto(concepto);
+        try {
+            conceptoService.createConcepto(concepto);
+            notificationText.setText("Concepto creado correctamente");
+        } catch(RuntimeException e) {
+            notificationText.setText(e.getMessage());
+        }
 
     }
 
