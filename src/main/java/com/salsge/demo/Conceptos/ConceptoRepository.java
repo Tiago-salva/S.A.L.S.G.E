@@ -4,4 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ConceptoRepository extends JpaRepository<Concepto, Long> {}
+public interface ConceptoRepository extends JpaRepository<Concepto, Long> {
+
+    boolean existsByConceptoNameOrCodigoConcepto(String conceptoName, String codigoConcepto);
+
+}
