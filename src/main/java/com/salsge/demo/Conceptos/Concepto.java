@@ -19,7 +19,7 @@ public class Concepto {
     @NotBlank
     private String codigoConcepto;
 
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     @NotBlank
     private String tipoDeConcepto;
     // Tipos de conceptos
