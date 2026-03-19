@@ -2,24 +2,45 @@ package com.salsge.demo.JavaFX;
 
 import com.salsge.demo.Conceptos.Concepto;
 import com.salsge.demo.Conceptos.ConceptoService;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 @Component
-public class ConceptoController {
+public class ConceptoController implements Initializable {
 
     @Autowired
     ConceptoService conceptoService;
 
+    // View conceptos
+    @FXML private TableView<Concepto> conceptoView;
+    @FXML private TableColumn<Concepto, String> conceptoCodigoCol;
+    @FXML private TableColumn<Concepto, String> conceptoNameCol;
+    @FXML private TableColumn<Concepto, String> conceptoTypeCol;
+
+    // Create conceptos
     @FXML private TextField conceptoNameField;
     @FXML private TextField conceptoCodigoField;
     @FXML private TextField conceptoTipoField;
     @FXML private Button conceptoButton;
     @FXML private Text notificationText;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        conceptoCodigoCol.setCellValueFactory(new PropertyValueFactory<>("codigoConcepto"));
+        conceptoNameCol.setCellValueFactory(new PropertyValueFactory<>("conceptoName"));
+        conceptoTypeCol.setCellValueFactory(new PropertyValueFactory<>("tipoDeConcepto"));
+
+        conceptoView.setItems(FXCollections.observableArrayList(conceptoService.getAllConceptos()));
+    }
 
     @FXML
     private void createConcepto() {
@@ -41,6 +62,15 @@ public class ConceptoController {
             notificationText.setText(e.getMessage());
         }
 
+    }
+
+    @FXML
+    private void deleteConcepto() {
+        String conceptoSelectedName = conceptoView.getSelectionModel().getSelectedItem().getConceptoName();
+        if(conceptoSelectedName != null) {
+            conceptoService.deleteConcepto(conceptoSelectedName);
+            conceptoView.setItems(FXCollections.observableArrayList(conceptoService.getAllConceptos()));
+        }
     }
 
 }
