@@ -2,6 +2,7 @@ package com.salsge.demo.Conceptos;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
@@ -31,6 +32,11 @@ public class ConceptoService {
 
         conceptoRepository.save(concepto);
 
+    }
+
+    @Transactional
+    public void deleteConcepto(String conceptoName) {
+        conceptoRepository.deleteByConceptoName(conceptoName);
     }
 
 }
