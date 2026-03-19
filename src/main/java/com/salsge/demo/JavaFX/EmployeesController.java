@@ -107,7 +107,7 @@ public class EmployeesController {
             renderAllEmployeesByName(newValue);
         });
 
-        // Event listener for the legajo nunmber textfield
+        // Event listener for the legajo number textfield
         // Find employees containing the same legajo numbers as the textField
         legajoNumber.textProperty().addListener((observable, oldValue, newValue) -> {
             System.out.println(newValue);
