@@ -8,4 +8,6 @@ public interface ConceptoRepository extends JpaRepository<Concepto, Long> {
 
     boolean existsByConceptoNameOrCodigoConcepto(String conceptoName, String codigoConcepto);
 
+    void deleteByConceptoName(String conceptoName);
+
 }
