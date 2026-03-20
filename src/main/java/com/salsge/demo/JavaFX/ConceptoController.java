@@ -66,11 +66,16 @@ public class ConceptoController implements Initializable {
 
     @FXML
     private void deleteConcepto() {
-        String conceptoSelectedName = conceptoView.getSelectionModel().getSelectedItem().getConceptoName();
-        if(conceptoSelectedName != null) {
+        Concepto conceptoSelected = conceptoView.getSelectionModel().getSelectedItem();
+        if(conceptoSelected == null) {
+            notificationText.setText("There's not concepto selected");
+        } else {
+            String conceptoSelectedName = conceptoSelected.getConceptoName();
+
             conceptoService.deleteConcepto(conceptoSelectedName);
             conceptoView.setItems(FXCollections.observableArrayList(conceptoService.getAllConceptos()));
         }
+
     }
 
 }
