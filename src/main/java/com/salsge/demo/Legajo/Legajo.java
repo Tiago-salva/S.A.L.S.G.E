@@ -1,5 +1,6 @@
 package com.salsge.demo.Legajo;
 
+import com.salsge.demo.Categorias.Categoria;
 import com.salsge.demo.Employees.Employee;
 import com.salsge.demo.Novedades.Novedad;
 import jakarta.persistence.*;
@@ -19,7 +20,7 @@ public class Legajo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(optional = false)
+    @OneToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id", nullable = false, unique = true)
     private Employee employee;
 
@@ -131,9 +132,9 @@ public class Legajo {
     @Column(nullable = false)
     private String puesto;
 
-    @NotBlank
-    @Column(nullable = false)
-    private String categoria;
+    @OneToOne
+    @JoinColumn(name = "categoria", nullable = false)
+    private Categoria categoria;
 
     @NotBlank
     @Column(nullable = false)
@@ -418,11 +419,12 @@ public class Legajo {
         this.puesto = puesto;
     }
 
-    public @NotBlank String getCategoria() {
+
+    public @NotBlank Categoria getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(@NotBlank String categoria) {
+    public void setCategoria(@NotBlank Categoria categoria) {
         this.categoria = categoria;
     }
 
