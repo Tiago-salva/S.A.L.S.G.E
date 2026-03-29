@@ -50,4 +50,9 @@ public class Categoria {
     public void setSueldo(String sueldo) {
         this.sueldo = sueldo;
     }
+
+    @Override
+    public String toString() {
+        return this.categoriaName;
+    }
 }
