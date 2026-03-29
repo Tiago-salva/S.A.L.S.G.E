@@ -217,13 +217,12 @@
          <CheckBox contentDisplay="GRAPHIC_ONLY" layoutX="1000.0" layoutY="105.0" mnemonicParsing="false" text="CheckBox" />
          <CheckBox contentDisplay="GRAPHIC_ONLY" layoutX="1000.0" layoutY="66.0" mnemonicParsing="false" text="CheckBox" />
          <TextField layoutX="794.0" layoutY="280.0" prefHeight="5.0" prefWidth="150.0" />
-         <TextField fx:id="categoriaField" layoutX="854.0" layoutY="406.0" prefHeight="26.0" prefWidth="162.0" />
          <Text layoutX="644.0" layoutY="381.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Puesto" wrappingWidth="149.5999999999999">
             <font>
                <Font size="15.0" />
             </font>
          </Text>
-         <Text layoutX="644.0" layoutY="425.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Categoria" wrappingWidth="149.5999999999999">
+         <Text layoutX="644.0" layoutY="423.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Categoria" wrappingWidth="149.5999999999999">
             <font>
                <Font size="15.0" />
             </font>
@@ -299,6 +298,7 @@
                <Font size="15.0" />
             </font>
          </Text>
+         <ChoiceBox fx:id="categoriaField" layoutX="855.0" layoutY="406.0" prefHeight="25.0" prefWidth="162.0" />
       </AnchorPane>
    </children>
 </AnchorPane>
