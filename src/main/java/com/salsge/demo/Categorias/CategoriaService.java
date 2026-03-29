@@ -19,4 +19,11 @@ public class CategoriaService {
     public Optional<Categoria> getCategoria(Long id) {
         return categoriaRepository.findById(id);
     }
+
+    public void editCategoria(Categoria categoria, String categoriaSueldo) {
+        categoria.setSueldo(categoriaSueldo);
+
+        categoriaRepository.save(categoria);
+    }
+
 }
