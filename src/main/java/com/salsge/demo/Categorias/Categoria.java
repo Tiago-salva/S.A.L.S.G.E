@@ -18,6 +18,9 @@ public class Categoria {
     @Column(nullable = false)
     private String sueldo;
 
+    public Categoria() {
+    }
+
     public Categoria(Long id, String categoriaName, String sueldo) {
         this.id = id;
         this.categoriaName = categoriaName;
