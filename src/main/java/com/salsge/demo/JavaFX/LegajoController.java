@@ -1,5 +1,7 @@
 package com.salsge.demo.JavaFX;
 
+import com.salsge.demo.Categorias.Categoria;
+import com.salsge.demo.Categorias.CategoriaService;
 import com.salsge.demo.Employees.Employee;
 import com.salsge.demo.Employees.EmployeeService;
 import com.salsge.demo.Legajo.Legajo;
@@ -32,6 +34,8 @@ public class LegajoController implements Initializable {
     LegajoService legajoService;
     @Autowired
     EmployeeService employeeService;
+    @Autowired
+    CategoriaService categoriaService;
 
     @FXML
     private TextField legajoField;
@@ -55,6 +59,7 @@ public class LegajoController implements Initializable {
 
     private ObservableList<String> sexoOptions = FXCollections.observableArrayList("Masculino", "Femenino", "No especificar");
     private ObservableList<String> estadoCivilOptions = FXCollections.observableArrayList("Casado/a", "Soltero/a", "Viudo/a", "No especificar");
+    private ObservableList<Categoria> categoriaOptions;
 
     @FXML private TextField cbuField;
     @FXML private TextField ctaField;
@@ -68,7 +73,7 @@ public class LegajoController implements Initializable {
     @FXML private TextField obraSocialField;
 
     @FXML private TextField puestoField;
-    @FXML private TextField categoriaField;
+    @FXML private ChoiceBox<Categoria> categoriaField;
     @FXML private TextField areaField;
     @FXML private TextField codActividadField;
     @FXML private TextField codCondicionField;
@@ -88,6 +93,9 @@ public class LegajoController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         sexoField.setItems(sexoOptions);
         estadoCivilField.setItems(estadoCivilOptions);
+
+        categoriaOptions = FXCollections.observableArrayList(categoriaService.getAllCategorias());
+        categoriaField.setItems(categoriaOptions);
     }
 
     public Legajo buildLegajoFromForm() throws ParseException {
@@ -125,7 +133,7 @@ public class LegajoController implements Initializable {
         legajo.setObraSocial(obraSocialField.getText());
 
         legajo.setPuesto(puestoField.getText());
-        legajo.setCategoria(categoriaField.getText());
+        legajo.setCategoria(categoriaField.getValue());
         legajo.setArea(areaField.getText());
         legajo.setCodigoActividad(Integer.valueOf(codActividadField.getText()));
         legajo.setCodigoCondicion(Integer.valueOf(codCondicionField.getText()));
@@ -201,7 +209,7 @@ public class LegajoController implements Initializable {
         obraSocialField.setText("");
 
         puestoField.setText("");
-        categoriaField.setText("");
+        categoriaField.getSelectionModel().clearSelection();
         areaField.setText("");
         codActividadField.setText("");
         codCondicionField.setText("");
@@ -246,7 +254,7 @@ public class LegajoController implements Initializable {
         obraSocialField.setText(legajo.getObraSocial());
 
         puestoField.setText(legajo.getPuesto());
-        categoriaField.setText(legajo.getCategoria());
+        categoriaField.setValue(legajo.getCategoria());
         areaField.setText(legajo.getArea());
         codActividadField.setText(String.valueOf(legajo.getCodigoActividad()));
         codCondicionField.setText(String.valueOf(legajo.getCodigoCondicion()));
