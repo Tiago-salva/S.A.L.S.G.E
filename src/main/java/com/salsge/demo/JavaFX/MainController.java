@@ -35,6 +35,10 @@ public class MainController {
         openFxmlView("/views/Concepto.fxml", "Conceptos");
     }
 
+    public void loadCategoriasView() throws IOException {
+        openFxmlView("/views/Categorias.fxml", "Categorias");
+    }
+
     public void openFxmlView(String path, String title) throws IOException {
         FXMLLoader loader = new FXMLLoader((getClass().getResource(path)));
         loader.setControllerFactory(applicationContext::getBean);
