@@ -11,6 +11,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -26,7 +27,7 @@ public class CategoriaController implements Initializable {
     @FXML private TextField categoriaTextField;
     @FXML private Button categoriaBtn;
 
-    @FXML private TextField notificationText;
+    @FXML private Text notificationText;
 
     @Autowired
     CategoriaService categoriaService;
@@ -39,8 +40,7 @@ public class CategoriaController implements Initializable {
         categoriaView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 categoriaTextField.setText(newValue.getSueldo());
-            } else {
-                System.out.println("Selection cleared.");
+                notificationText.setText("");
             }
         });
 
@@ -53,11 +53,22 @@ public class CategoriaController implements Initializable {
         if(categoriaSelected == null) {
             notificationText.setText("There's not categoria selected");
         } else {
-            String categoriaNuevoSueldo = categoriaTextField.getText();
-            categoriaSelected.setSueldo(categoriaNuevoSueldo);
+            categoriaService.editCategoria(categoriaSelected, categoriaTextField.getText());
+
+            notificationText.setText("Actualizado con exito");
 
             categoriaView.setItems(FXCollections.observableArrayList(categoriaService.getAllCategorias()));
         }
     }
 
 }
+
+
+
+
+
+
+
+
+
+
