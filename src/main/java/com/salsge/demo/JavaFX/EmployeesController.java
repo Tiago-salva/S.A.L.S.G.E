@@ -103,7 +103,6 @@ public class EmployeesController {
         // Event listener for the fullName textfield
         // Search employees containing the same letters as the textField
         employeeName.textProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println(newValue);
             renderAllEmployeesByName(newValue);
         });
 
