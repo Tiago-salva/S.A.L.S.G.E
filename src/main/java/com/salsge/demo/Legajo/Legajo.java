@@ -132,7 +132,7 @@ public class Legajo {
     @Column(nullable = false)
     private String puesto;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "categoria", nullable = false)
     private Categoria categoria;
 
@@ -420,11 +420,11 @@ public class Legajo {
     }
 
 
-    public @NotBlank Categoria getCategoria() {
+    public Categoria getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(@NotBlank Categoria categoria) {
+    public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
 
