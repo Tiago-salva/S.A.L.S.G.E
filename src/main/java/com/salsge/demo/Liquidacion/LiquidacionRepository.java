@@ -1,4 +1,6 @@
 package com.salsge.demo.Liquidacion;
 
-public class LiquidacionRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface LiquidacionRepository extends JpaRepository<Liquidacion, Long> {
 }
