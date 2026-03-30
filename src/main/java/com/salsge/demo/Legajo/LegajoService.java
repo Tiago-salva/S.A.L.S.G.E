@@ -3,11 +3,13 @@ package com.salsge.demo.Legajo;
 import com.salsge.demo.Employees.Employee;
 import com.salsge.demo.Employees.EmployeeRepository;
 import com.salsge.demo.Employees.EmployeeService;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Validated
@@ -41,14 +43,19 @@ public class LegajoService {
     @Transactional
     public void createLegajo(Legajo legajo) {
 
-            String employeeFullName = legajo.getNames() + " " + legajo.getLastNames();
+        Optional<Legajo> legajoExists = getLegajoByNumber(legajo.getNumeroDeLegajo());
 
-            Employee employee = new Employee(employeeFullName);
+        if(legajoExists.isPresent()) throw new DuplicateKeyException("El numero de legajo ya esta presente en otro legajo");
 
-            legajo.setEmployee(employee);
-            employee.assignLegajo(legajo); // This should set both sides
+        String employeeFullName = legajo.getNames() + " " + legajo.getLastNames();
 
-            employeeService.createEmployee(employee);
+        Employee employee = new Employee(employeeFullName);
+
+        legajo.setEmployee(employee);
+
+        employee.assignLegajo(legajo); // This should set both sides
+
+        employeeService.createEmployee(employee);
 
     }
 
@@ -80,6 +87,16 @@ public class LegajoService {
         legajo.setTipoEmpleado(legajoData.getTipoEmpleado());
         legajo.setConvenio(legajoData.getConvenio());
         legajo.setObraSocial(legajoData.getObraSocial());
+
+        legajo.setPuesto(legajoData.getPuesto());
+        legajo.setCategoria(legajoData.getCategoria());
+        legajo.setArea(legajoData.getArea());
+        legajo.setCodigoActividad(legajoData.getCodigoActividad());
+        legajo.setCodigoCondicion(legajoData.getCodigoCondicion());
+        legajo.setCodigoIncapacidad(legajoData.getCodigoIncapacidad());
+        legajo.setSituacionRevista(legajoData.getSituacionRevista());
+        legajo.setCodigoZona(legajoData.getCodigoZona());
+        legajo.setModalidadTrabajo(legajoData.getModalidadTrabajo());
 
         legajoRepository.save(legajo);
 
