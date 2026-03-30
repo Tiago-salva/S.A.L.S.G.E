@@ -15,6 +15,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -37,8 +38,9 @@ public class LegajoController implements Initializable {
     @Autowired
     CategoriaService categoriaService;
 
-    @FXML
-    private TextField legajoField;
+    @FXML private Text notificationText;
+
+    @FXML private TextField legajoField;
     @FXML private TextField apellidoField;
     @FXML private TextField nombreField;
     @FXML private TextField direccionField;
@@ -147,38 +149,44 @@ public class LegajoController implements Initializable {
     };
 
     public void createLegajo() throws ParseException {
-        Legajo legajo = buildLegajoFromForm();
+        try {
+            Legajo legajo = buildLegajoFromForm();
 
-        legajoService.createLegajo(legajo);
+            legajoService.createLegajo(legajo);
+
+        } catch(DuplicateKeyException e) {
+            notificationText.setText(e.getMessage());
+        }
     }
 
     public void editLegajo() throws ParseException {
+         // If there's a employee selected, then the legajo exists
+            if(employee != null) {
 
-        // If there's a employee selected, then the legajo exists
-        if(employee != null) {
+                // Get id of the legajo to edit
+                Legajo legajo = employee.getLegajo();
+                Long legajoId = legajo.getId();
 
-            // Get id of the legajo to edit
-            Legajo legajo = employee.getLegajo();
-            Long legajoId = legajo.getId();
+                // Get the new legajo data
+                Legajo legajoData = buildLegajoFromForm();
 
-            // Get the new legajo data
-            Legajo legajoData = buildLegajoFromForm();
+                legajoService.editLegajo(legajoId, legajoData);
 
-            legajoService.editLegajo(legajoId, legajoData);
+                // Refresh the employee data
+                Long employeeId = employee.getId();
+                String employeeFullName = legajoData.getNames() + " " + legajoData.getLastNames();
 
-            // Refresh the employee data
-            Long employeeId = employee.getId();
-            String employeeFullName = legajoData.getNames() + " " + legajoData.getLastNames();
+                employeeService.editEmployee(employeeId, employeeFullName);
 
-            employeeService.editEmployee(employeeId, employeeFullName);
-
-        } else {
-            System.out.println("There's no legajo selected to edit, first select one");
-        }
+            } else {
+                notificationText.setText("There's no legajo selected to edit, first select one");
+            }
     }
 
     public void clearLegajo() {
         setEmployee(null);
+
+        notificationText.setText("");
 
         legajoField.setText("");
         apellidoField.setText("");
