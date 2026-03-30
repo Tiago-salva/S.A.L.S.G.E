@@ -29,7 +29,7 @@
                   </Text>
                </children>
             </Pane>
-            <TableView fx:id="allEmployeesView" layoutY="123.0" prefHeight="721.0" prefWidth="312.0">
+            <TableView fx:id="allEmployeesView" layoutY="123.0" prefHeight="878.0" prefWidth="312.0">
                <columns>
                   <TableColumn fx:id="colFullName" prefWidth="311.20001220703125" text="Nombre y apellido" />
                </columns>
@@ -38,6 +38,6 @@
       </Pane>
    </left>
    <right>
-      <StackPane fx:id="legajoContainer" prefHeight="843.0" prefWidth="1054.0" BorderPane.alignment="CENTER" />
+      <StackPane fx:id="legajoContainer" prefHeight="878.0" prefWidth="1054.0" BorderPane.alignment="CENTER" />
    </right>
 </BorderPane>
