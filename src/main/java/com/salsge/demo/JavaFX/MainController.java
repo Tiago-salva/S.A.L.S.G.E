@@ -24,7 +24,7 @@ public class MainController {
     }
 
     public void loadPayrollView() throws IOException {
-        openFxmlView("/views/Home.fxml", "Employees");
+        openFxmlView("/views/Liquidacion.fxml", "Liquidacion");
     }
 
     public void loadNovedadesView() throws IOException {
