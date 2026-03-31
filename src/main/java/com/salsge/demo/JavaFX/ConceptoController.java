@@ -51,6 +51,11 @@ public class ConceptoController implements Initializable {
         String conceptoCodigo = conceptoCodigoField.getText();
         String conceptoTipo = conceptoTipoField.getText();
 
+        if(conceptoName.isEmpty() || conceptoCodigo.isEmpty() || conceptoTipo.isEmpty()) {
+            notificationText.setText("No puede haber campos vacios");
+            return;
+        }
+
         concepto.setConceptoName(conceptoName);
         concepto.setCodigoConcepto(conceptoCodigo);
         concepto.setTipoDeConcepto(conceptoTipo);
