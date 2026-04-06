@@ -18,6 +18,11 @@ public class ConceptoService {
         return conceptoRepository.findAll();
     };
 
+    public List<Concepto> getAllConceptosAportes() {
+        List<String> codigos = List.of("810000", "810001", "810002", "821001", "821002");
+        return conceptoRepository.findByCodigoConceptoIn(codigos);
+    }
+
     public boolean existsConcepto(String conceptoName, String codigoConcepto) {
         return conceptoRepository.existsByConceptoNameOrCodigoConcepto(conceptoName, codigoConcepto);
     }
