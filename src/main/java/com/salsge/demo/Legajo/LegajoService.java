@@ -36,6 +36,10 @@ public class LegajoService {
         return legajoRepository.findByNumeroDeLegajoContainingIgnoreCase(legajoNumber);
     }
 
+    public Optional<Legajo> getLegajoCompleteByNumber(String legajoNumber) {
+        return legajoRepository.findCompleteById(legajoNumber);
+    }
+
     public List<Legajo> getAllLegajosByNumber(List<String> legajoNumbers) {
         return legajoRepository.findByNumeroDeLegajoIn(legajoNumbers);
     }
