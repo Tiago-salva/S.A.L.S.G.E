@@ -63,6 +63,7 @@ public class ConceptoController implements Initializable {
         try {
             conceptoService.createConcepto(concepto);
             notificationText.setText("Concepto creado correctamente");
+            conceptoView.setItems(FXCollections.observableArrayList(conceptoService.getAllConceptos()));
         } catch(RuntimeException e) {
             notificationText.setText(e.getMessage());
         }
