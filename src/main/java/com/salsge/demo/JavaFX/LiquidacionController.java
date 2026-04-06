@@ -1,5 +1,7 @@
 package com.salsge.demo.JavaFX;
 
+import com.salsge.demo.Conceptos.Concepto;
+import com.salsge.demo.Conceptos.ConceptoService;
 import com.salsge.demo.Legajo.Legajo;
 import com.salsge.demo.Legajo.LegajoRepository;
 import com.salsge.demo.Legajo.LegajoService;
@@ -19,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.net.URL;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.ResourceBundle;
 
 @Component
@@ -27,9 +30,11 @@ public class LiquidacionController implements Initializable {
     @Autowired
     private LegajoService legajoService;
     @Autowired
-    private LegajoRepository legajoRepository;
+    private ConceptoService conceptoService;
 
     @FXML private AnchorPane anchorPane;
+    @FXML private StackPane stackPane;
+    @FXML private GridPane gridPane;
     @FXML private TextField numeroDeLegajoField;
 
     public LiquidacionController() {
@@ -38,52 +43,35 @@ public class LiquidacionController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        System.out.println(numeroDeLegajoField);
-
-//        // Fila 0
-//        gridPane.add(new Label("110000"), 0, 0);
-//        gridPane.add(new Label("Sueldo Básico"), 1, 0);
-//        gridPane.add(new Label("$ 564.155,63"), 4, 0);
-//
-//        // Fila 1
-//        gridPane.add(new Label("111000"), 0, 1);
-//        gridPane.add(new Label("Ausencia Injustificada"), 1, 1);
-//        gridPane.add(new Label("10"), 2, 1);
-//        gridPane.add(new Label("-$ 188.051,88"),4, 1);
-
         numeroDeLegajoField.textProperty().addListener((observable, oldValue, newValue) -> {
 
-            StackPane stack = new StackPane();
-            anchorPane.getChildren().add(stack);
+            Legajo legajo = legajoService.getLegajoCompleteByNumber(newValue).orElseThrow(() -> new RuntimeException("No existe ese legajo"));
 
-            AnchorPane.setTopAnchor(stack, 0.0);
-            AnchorPane.setBottomAnchor(stack, 0.0);
-            AnchorPane.setLeftAnchor(stack, 0.0);
-            AnchorPane.setRightAnchor(stack, 0.0);
+            gridPane.add(new Label(legajo.getNumeroDeLegajo()), 0, 0);
+            gridPane.add(new Label(legajo.getEmployee().getFullName()), 1, 0);
 
-            GridPane gridPane = new GridPane();
-            stack.getChildren().add(gridPane);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            String formattedDate = legajo.getFechaDeIngreso().format(formatter);
+            gridPane.add(new Label(formattedDate),4, 0);
 
-            gridPane.setHgap(15);
-            gridPane.setVgap(10);
-            gridPane.setPadding(new Insets(20));
-
-            ColumnConstraints col1 = new ColumnConstraints();
-            col1.setHalignment(HPos.LEFT);
-
-            ColumnConstraints col2 = new ColumnConstraints();
-            col2.setHalignment(HPos.LEFT);
-
-            ColumnConstraints col3 = new ColumnConstraints();
-            col3.setHalignment(HPos.RIGHT);
-
-            gridPane.getColumnConstraints().addAll(col1, col2, col3);
+            generateAportesLiquidacion();
 
         });
 
-
     }
 
+    public void generateAportesLiquidacion() {
+
+        List<Concepto> conceptoAportes = conceptoService.getAllConceptosAportes();
+        int index = 5;
+
+        for (Concepto c : conceptoAportes) {
+            gridPane.add(new Label(c.getCodigoConcepto()), 0, index);
+            gridPane.add(new Label(c.getConceptoName()), 1, index);
+            gridPane.add(new Label("Formula"), 6, index);
+            index++;
+        }
 
 
+    }
 }
