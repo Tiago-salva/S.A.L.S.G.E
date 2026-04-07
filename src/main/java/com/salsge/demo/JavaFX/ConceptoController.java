@@ -128,7 +128,7 @@ public class ConceptoController implements Initializable {
     public BigDecimal calcular(Concepto concepto, Legajo legajo, int cantidad) {
 
         if (concepto.getFormula() != null) {
-            // 👉 usar SpEL
+
             ExpressionParser parser = new SpelExpressionParser();
             StandardEvaluationContext context = new StandardEvaluationContext();
 
@@ -140,7 +140,6 @@ public class ConceptoController implements Initializable {
 
             return BigDecimal.valueOf(result);
         } else {
-            // 👉 lógica fija
             switch (concepto.getTipoCalculo()) {
                 case FIJO:
                     return legajo.getSueldo();
