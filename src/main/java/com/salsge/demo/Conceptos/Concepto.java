@@ -27,14 +27,17 @@ public class Concepto {
     // No remunerativo
     // Descuento
 
+    @Column
+    private String formula;
 
     public Concepto() {};
 
-    public Concepto(Long id, String codigoConcepto, String conceptoName, String tipoDeConcepto) {
+    public Concepto(Long id, String conceptoName, String codigoConcepto, String tipoDeConcepto, String formula) {
         this.id = id;
-        this.codigoConcepto = codigoConcepto;
         this.conceptoName = conceptoName;
+        this.codigoConcepto = codigoConcepto;
         this.tipoDeConcepto = tipoDeConcepto;
+        this.formula = formula;
     }
 
     public Long getId() {
@@ -67,6 +70,14 @@ public class Concepto {
 
     public void setTipoDeConcepto(String tipoDeConcepto) {
         this.tipoDeConcepto = tipoDeConcepto;
+    }
+
+    public String getFormula() {
+        return formula;
+    }
+
+    public void setFormula(String formula) {
+        this.formula = formula;
     }
 
     @Override
