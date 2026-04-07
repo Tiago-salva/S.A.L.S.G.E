@@ -30,6 +30,15 @@ public class Concepto {
     @Column
     private String formula;
 
+    @Column(nullable = false)
+    private TipoDeCalculo tipoDeCalculo;
+
+    enum TipoDeCalculo {
+        PORCENTAJE_SUELDO,
+        HORAS_EXTRAS,
+        FIJO
+    }
+
     public Concepto() {};
 
     public Concepto(Long id, String conceptoName, String codigoConcepto, String tipoDeConcepto, String formula) {
