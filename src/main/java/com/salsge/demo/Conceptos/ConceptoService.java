@@ -44,4 +44,14 @@ public class ConceptoService {
         conceptoRepository.deleteByConceptoName(conceptoName);
     }
 
+    public void editConcepto(Concepto conceptoSelected, String conceptoName, String conceptoCodigo, String conceptoTipo, String conceptoFormula) {
+
+        conceptoSelected.setConceptoName(conceptoName);
+        conceptoSelected.setCodigoConcepto(conceptoCodigo);
+        conceptoSelected.setTipoDeConcepto(conceptoTipo);
+        conceptoSelected.setFormula(conceptoFormula);
+
+        conceptoRepository.save(conceptoSelected);
+
+    }
 }
