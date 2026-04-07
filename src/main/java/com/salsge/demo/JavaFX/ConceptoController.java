@@ -123,4 +123,37 @@ public class ConceptoController implements Initializable {
         }
     }
 
+    // Funcion para manejar las formulas de los conceptos
+    /*
+    public BigDecimal calcular(Concepto concepto, Legajo legajo, int cantidad) {
+
+        if (concepto.getFormula() != null) {
+            // 👉 usar SpEL
+            ExpressionParser parser = new SpelExpressionParser();
+            StandardEvaluationContext context = new StandardEvaluationContext();
+
+            context.setVariable("sueldo", legajo.getSueldo());
+            context.setVariable("cantidad", cantidad);
+
+            Double result = parser.parseExpression(concepto.getFormula())
+                    .getValue(context, Double.class);
+
+            return BigDecimal.valueOf(result);
+        } else {
+            // 👉 lógica fija
+            switch (concepto.getTipoCalculo()) {
+                case FIJO:
+                    return legajo.getSueldo();
+
+                case PORCENTAJE_SUELDO:
+                    return legajo.getSueldo().multiply(concepto.getValor());
+
+                default:
+                    throw new RuntimeException("Tipo no soportado");
+            }
+        }
+    }
+
+    */
+
 }
