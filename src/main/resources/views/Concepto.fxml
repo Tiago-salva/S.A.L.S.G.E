@@ -9,9 +9,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.salsge.demo.JavaFX.ConceptoController">
+<BorderPane prefHeight="479.0" prefWidth="1146.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.salsge.demo.JavaFX.ConceptoController">
    <right>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="419.0" prefWidth="530.0" BorderPane.alignment="CENTER">
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="478.0" prefWidth="530.0" BorderPane.alignment="CENTER">
          <children>
             <TextField fx:id="conceptoCodigoField" layoutX="164.0" layoutY="188.0" prefHeight="26.0" prefWidth="209.0" promptText="Codigo">
                <font>
@@ -33,33 +33,44 @@
                   <Font size="30.0" />
                </font>
             </Text>
-            <Button fx:id="conceptoButton" layoutX="204.0" layoutY="304.0" mnemonicParsing="false" onAction="#createConcepto" text="Create concepto">
+            <Button fx:id="createConceptoBtn" layoutX="115.0" layoutY="411.0" mnemonicParsing="false" onAction="#createConcepto" text="Create concepto">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Text fx:id="notificationText" layoutX="-3.0" layoutY="384.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="543.826171875">
+            <Text fx:id="notificationText" layoutX="-3.0" layoutY="383.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="543.826171875">
                <font>
                   <Font size="15.0" />
                </font>
             </Text>
+            <TextField fx:id="conceptoFormulaField" layoutX="164.0" layoutY="306.0" prefHeight="26.0" prefWidth="209.0" promptText="Formula">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Button fx:id="editConceptoBtn" layoutX="285.0" layoutY="411.0" mnemonicParsing="false" onAction="#editConcepto" text="Edit concepto">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
    </right>
    <left>
-      <AnchorPane prefHeight="419.0" prefWidth="382.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="479.0" prefWidth="426.0" BorderPane.alignment="CENTER">
          <children>
-            <TableView fx:id="conceptoView" layoutY="1.0" prefHeight="369.0" prefWidth="426.0">
+            <TableView fx:id="conceptoView" layoutY="1.0" prefHeight="411.0" prefWidth="614.0">
               <columns>
                 <TableColumn fx:id="conceptoCodigoCol" prefWidth="75.0" text="Codigo" />
                   <TableColumn fx:id="conceptoNameCol" prefWidth="75.0" text="Name" />
                   <TableColumn fx:id="conceptoTypeCol" prefWidth="75.0" text="Tipo" />
+                  <TableColumn fx:id="conceptoFormulaCol" prefWidth="75.0" text="Formula" />
               </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <Button fx:id="deleteButton" layoutX="172.0" layoutY="381.0" mnemonicParsing="false" onAction="#deleteConcepto" prefHeight="26.0" prefWidth="82.0" text="Delete">
+            <Button fx:id="deleteConceptoBtn" layoutX="266.0" layoutY="428.0" mnemonicParsing="false" onAction="#deleteConcepto" prefHeight="26.0" prefWidth="82.0" text="Delete">
                <font>
                   <Font size="14.0" />
                </font>
