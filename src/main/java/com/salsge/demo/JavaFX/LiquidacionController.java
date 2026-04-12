@@ -19,9 +19,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 @Component
@@ -54,21 +58,29 @@ public class LiquidacionController implements Initializable {
             String formattedDate = legajo.getFechaDeIngreso().format(formatter);
             gridPane.add(new Label(formattedDate),4, 0);
 
-            generateAportesLiquidacion();
+            generateAportesLiquidacion(legajo.getSueldo());
 
         });
 
     }
 
-    public void generateAportesLiquidacion() {
+    public void generateAportesLiquidacion(BigDecimal sueldo) {
 
         List<Concepto> conceptoAportes = conceptoService.getAllConceptosAportes();
         int index = 5;
 
+        DecimalFormat format = (DecimalFormat) DecimalFormat.getInstance(new Locale("es", "AR"));
+        format.applyPattern("#,##0.00");
+
         for (Concepto c : conceptoAportes) {
             gridPane.add(new Label(c.getCodigoConcepto()), 0, index);
             gridPane.add(new Label(c.getConceptoName()), 1, index);
-            gridPane.add(new Label("Formula"), 6, index);
+
+            BigDecimal resultadoFormula = c.calcular(c, sueldo);
+            String sueldoFormateado = format.format(resultadoFormula);
+
+
+            gridPane.add(new Label(sueldoFormateado), 6, index);
             index++;
         }
 
