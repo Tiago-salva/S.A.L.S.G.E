@@ -1,8 +1,14 @@
 package com.salsge.demo.Conceptos;
 
+import com.salsge.demo.Legajo.Legajo;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
+import org.springframework.expression.ExpressionParser;
+import org.springframework.expression.spel.standard.SpelExpressionParser;
+import org.springframework.expression.spel.support.StandardEvaluationContext;
+
+import java.math.BigDecimal;
 
 @Entity(name = "concepto")
 public class Concepto {
@@ -30,13 +36,16 @@ public class Concepto {
     @Column
     private String formula;
 
-    @Column(nullable = false)
-    private TipoDeCalculo tipoDeCalculo;
+    public BigDecimal calcular(Concepto concepto, BigDecimal sueldo) {
+        ExpressionParser parser = new SpelExpressionParser();
+        StandardEvaluationContext context = new StandardEvaluationContext();
 
-    enum TipoDeCalculo {
-        PORCENTAJE_SUELDO,
-        HORAS_EXTRAS,
-        FIJO
+        context.setVariable("sueldo", sueldo);
+
+        Double result = parser.parseExpression(concepto.getFormula())
+                .getValue(context, Double.class);
+
+        return BigDecimal.valueOf(result);
     }
 
     public Concepto() {};
