@@ -129,7 +129,7 @@ public class LegajoController implements Initializable {
         legajo.setCbu(cbuField.getText());
         legajo.setCta(ctaField.getText());
         legajo.setBanco(bancoField.getText());
-        legajo.setSueldo(BigDecimal.valueOf(MONEY_FORMAT.parse(sueldoField.getText()).doubleValue()));
+        legajo.setSueldo(new BigDecimal(sueldoField.getText()));
         legajo.setTipoEmpleado(tipoEmpleadoField.getText());
         legajo.setConvenio(convenioField.getText());
         legajo.setObraSocial(obraSocialField.getText());
